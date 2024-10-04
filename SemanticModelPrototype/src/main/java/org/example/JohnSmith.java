@@ -16,10 +16,12 @@ public class JohnSmith {
     // VCARD: The property is provided by a "constant" class VCARD which holds objects representing all the definitions in the VCARD schema.
     // Jena provides constant classes for other well known schemas, such as RDF and RDF schema themselves, Dublin Core and OWL.
     Resource johnSmith = model.createResource(personURI)
-            .addProperty(VCARD.FN, fullName)
+            .addProperty(VCARD.FN, fullName) // Subject = Resource (johnSmith), predicate = VCARD.FN (the property), object = fullName (Resource or literal, pointed by the arc)
+            // -> statement or triple
             .addProperty(VCARD.N,
                     model.createResource()
                             .addProperty(VCARD.Given, givenName)
                             .addProperty(VCARD.Family, familyName));
 
+    public JohnSmith() {}
 }
