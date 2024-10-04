@@ -1,4 +1,4 @@
-# bachelorthesis_project
+## Project description
  
 This project is part of my bachelor thesis "Conception and prototypical realisation of semantic models for data processing in distributed data structures of public transport systems".
 
