@@ -28,7 +28,7 @@ public class RDFReader {
         }
     }
 
-    public static void readRDFFile(String path) {
+    public static Model readRDFFile(String path) {
         // create an empty model
         Model model = ModelFactory.createDefaultModel();
 
@@ -41,7 +41,6 @@ public class RDFReader {
         // read the RDF/XML file
         model.read(in, null);
 
-        // write it to standard out
-        model.write(System.out);
+        return model;
     }
 }
