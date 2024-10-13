@@ -8,6 +8,6 @@ In this particular case, the user shall be able to recieve all available data co
 Framework: Apache Jena 5.10
 
 Download and Installation: 
-1. Download following binary distribution of the framework: https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-5.1.0.tar.gz
+1. Download following binary distribution of the framework: https://dlcdn.apache.org/jena/binaries/apache-jena-5.1.0.tar.gz
 2. Extract the compressed folder
 3. Import all the .jar files found inside the lib folder of the extracted source folder into the repository on your computer

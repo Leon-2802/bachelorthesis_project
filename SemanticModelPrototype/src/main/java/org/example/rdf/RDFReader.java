@@ -1,4 +1,4 @@
-package org.example;
+package org.example.rdf;
 
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
