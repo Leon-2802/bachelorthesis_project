@@ -1,6 +1,8 @@
 package org.example;
 
+import org.apache.jena.ontapi.model.OntModel;
 import org.apache.jena.rdf.model.Model;
+import org.example.ontology.OntModelTripleRepresentation;
 import org.example.ontology.OntologyExample;
 import org.example.rdf.JohnSmith;
 import org.example.rdf.RDFReader;
@@ -16,6 +18,10 @@ public class Main {
         // RDFTutorial.containers(model);
 
         //Ontology:
-        OntologyExample.creatingOntologyModel();
+        // OntModel m = OntologyExample.loadModelFromString();
+        // m.write(System.out, "RDF/XML-ABBREV");
+
+        OntModel m = OntModelTripleRepresentation.example();
+        m.write(System.out, "RDF/XML");
     }
 }

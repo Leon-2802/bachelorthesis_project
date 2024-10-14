@@ -1,0 +1,5 @@
+<owl:Ontology rdf:about="">
+  <dc:creator rdf:value="Ian Dickinson" />
+  <owl:imports rdf:resource="http://jena.apache.org/examples/imported-ontology-iri" />
+  <owl:versionIRI rdf:resource="http://jena.apache.org/examples/this-ontology-iri" />
+</owl:Ontology>
