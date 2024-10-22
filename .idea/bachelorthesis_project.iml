@@ -5,6 +5,6 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="apiguardian-api-1.1.2" level="project" />
+    <orderEntry type="library" name="apache-jena-5.1.0" level="project" />
   </component>
 </module>

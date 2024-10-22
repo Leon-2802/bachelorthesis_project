@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="apiguardian-api-1.1.2">
+  <library name="apache-jena-5.1.0">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../../Java_Libraries/apache-jena-5.1.0/lib/apiguardian-api-1.1.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/../../../Java_Libraries/apache-jena-5.1.0/lib/caffeine-3.1.8.jar!/" />

@@ -15,6 +15,6 @@ public class Main {
         // OntModel m = OntologyExample.loadModelFromString();
         // m.write(System.out, "RDF/XML-ABBREV");
 
-        VRNRequests.vrnStopReq("Kaiserslautern");
+        VRNRequests.vrnStopReq("Hochschule Karlsruhe");
     }
 }

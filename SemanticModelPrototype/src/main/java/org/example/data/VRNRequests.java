@@ -2,13 +2,10 @@ package org.example.data;
 
 import org.implementation.HelperFunctions;
 import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import javax.net.ssl.HttpsURLConnection;
-import javax.print.Doc;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.net.URL;
 
@@ -38,9 +35,6 @@ public class VRNRequests {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document document = builder.parse("SemanticModelPrototype/src/main/java/org/example/data/base_stop_req.xml");
-
-            // Update RequestTimestamp
-            document.getElementsByTagName("siri:RequestTimestamp").item(0).setTextContent(HelperFunctions.getCurrentTime());
             // Update RequestTimestamp
             document.getElementsByTagName("siri:RequestTimestamp").item(0).setTextContent(HelperFunctions.getCurrentTime());
             // Set name of stop
