@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Trias version="1.2" xmlns="http://www.vdv.de/trias" xmlns:siri="http://www.siri.org.uk/siri" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.vdv.de/trias ../trias-xsd-v1.1/Trias.xsd">
+    <ServiceRequest>
+        <siri:RequestTimestamp>2021-08-26T16:00:00Z</siri:RequestTimestamp>
+        <siri:RequestorRef>gateway-api</siri:RequestorRef>
+        <siri:MessageIdentifier>4711</siri:MessageIdentifier>
+        <RequestPayload>
+            <TripRequest>
+                <Origin>
+                    <LocationRef>
+                        <GeoPosition>
+                            <Longitude>7.77346</Longitude>
+                            <Latitude>48.58808</Latitude>
+                        </GeoPosition>
+                        <LocationName>
+                            <Text>Verdun, Strasbourg</Text>
+                        </LocationName>
+                    </LocationRef>
+                </Origin>
+                <Destination>
+                    <LocationRef>
+                        <GeoPosition>
+                            <Longitude>7.94174</Longitude>
+                            <Latitude>48.45923</Latitude>
+                        </GeoPosition>
+                        <LocationName>
+                            <Text>Hochschule, Offenburg</Text>
+                        </LocationName>
+                    </LocationRef>
+                </Destination>
+                <Params>
+                    <NumberOfResults>10</NumberOfResults>
+                    <IncludeIntermediateStops>false</IncludeIntermediateStops>
+                </Params>
+            </TripRequest>
+        </RequestPayload>
+    </ServiceRequest>
+</Trias>

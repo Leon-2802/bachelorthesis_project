@@ -140,4 +140,7 @@ fabric.properties
 hs_err_pid*
 replay_pid*
 
+# hidden private files #
+vrnApiKey.txt
+
 # End of https://www.toptal.com/developers/gitignore/api/intellij,java

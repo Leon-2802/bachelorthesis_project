@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Trias xmlns="http://www.vdv.de/trias" xmlns:siri="http://www.siri.org.uk/siri" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2">
+    <ServiceRequest>
+        <siri:RequestTimestamp>2019-11-271T15:17:28</siri:RequestTimestamp>
+        <siri:RequestorRef>gateway-api</siri:RequestorRef>
+        <RequestPayload>
+            <LocationInformationRequest>
+                <InitialInput>
+                    <LocationName>schwetzingen, schloss</LocationName>
+                </InitialInput>
+                <Restrictions>
+                    <Type>stop</Type>
+                </Restrictions>
+            </LocationInformationRequest>
+        </RequestPayload>
+    </ServiceRequest>
+</Trias>
