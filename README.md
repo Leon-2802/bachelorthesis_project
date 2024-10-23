@@ -10,4 +10,4 @@ Framework: Apache Jena 5.10
 Download and Installation: 
 1. Download following binary distribution of the framework: https://dlcdn.apache.org/jena/binaries/apache-jena-5.1.0.tar.gz
 2. Extract the compressed folder
-3. Import all the .jar files found inside the lib folder of the extracted source folder into the repository on your computer
+3. Import all the .jar files found inside the lib folder of the extracted source folder into the repo, by opening it in IntelliJ (or other preffered IDE) and adding it under the libraries-tab in the project settings
