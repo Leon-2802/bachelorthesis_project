@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.data.VRNRequests;
+import org.implementation.Coord;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,6 +16,8 @@ public class Main {
         // OntModel m = OntologyExample.loadModelFromString();
         // m.write(System.out, "RDF/XML-ABBREV");
 
-        VRNRequests.vrnStopReq("Budapest");
+        // String res = VRNRequests.vrnLocInfoReq("Strasbourg");
+        String res = VRNRequests.vrnCoordToCoordTripReq(new Coord(7.77346f, 48.58808f), new Coord(7.94174f, 48.45923f), "1");
+        System.out.println("Response: " + res);
     }
 }

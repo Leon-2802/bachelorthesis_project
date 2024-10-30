@@ -9,28 +9,25 @@
                 <Origin>
                     <LocationRef>
                         <GeoPosition>
-                            <Longitude>7.77346</Longitude>
-                            <Latitude>48.58808</Latitude>
+                            <Longitude>0</Longitude>
+                            <Latitude>0</Latitude>
                         </GeoPosition>
-                        <LocationName>
-                            <Text>Verdun, Strasbourg</Text>
-                        </LocationName>
                     </LocationRef>
                 </Origin>
                 <Destination>
                     <LocationRef>
                         <GeoPosition>
-                            <Longitude>7.94174</Longitude>
-                            <Latitude>48.45923</Latitude>
+                            <Longitude>0</Longitude>
+                            <Latitude>0</Latitude>
                         </GeoPosition>
-                        <LocationName>
-                            <Text>Hochschule, Offenburg</Text>
-                        </LocationName>
                     </LocationRef>
                 </Destination>
                 <Params>
                     <NumberOfResults>10</NumberOfResults>
+                    <IncludeTrackSections>false</IncludeTrackSections>
                     <IncludeIntermediateStops>false</IncludeIntermediateStops>
+                    <IncludeLegProjection>false</IncludeLegProjection>
+                    <IncludeFares>true</IncludeFares>
                 </Params>
             </TripRequest>
         </RequestPayload>
