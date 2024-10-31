@@ -9,18 +9,12 @@
                 <Origin>
                     <LocationRef>
                         <StopPointRef>de:08222:2417</StopPointRef>
-                        <LocationName>
-                            <Text>Mannheim, Hauptbahnhof</Text>
-                        </LocationName>
                     </LocationRef>
                     <DepArrTime>2024-09-25T11:30:00.000Z</DepArrTime>
                 </Origin>
                 <Destination>
                     <LocationRef>
                         <StopPointRef>de:08221:1160</StopPointRef>
-                        <LocationName>
-                            <Text>Heidelberg, Hauptbahnhof</Text>
-                        </LocationName>
                     </LocationRef>
                 </Destination>
                 <Params>

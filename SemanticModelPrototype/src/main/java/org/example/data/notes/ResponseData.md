@@ -11,6 +11,10 @@
 
 ### TripResponse
 #### Structure:
+- TripRespnseContext
+  - Manchmal TriasSituations enthalten
+    - Darin Infos zum Bahnbetrieb mit AffectedVehicleJourneys
+    - Alle Infos welche Stationen auf der Reise betreffen angezeigt (denke ich...)
 - TripResult -> ResultID, Trip:
   - Duration
   - StartTime + EndTime

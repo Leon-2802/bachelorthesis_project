@@ -1,6 +1,7 @@
 package org.example;
 
-import org.example.data.VRNRequests;
+import org.example.data.RequestTargets;
+import org.example.data.TriasRequests;
 import org.implementation.Coord;
 
 public class Main {
@@ -17,7 +18,8 @@ public class Main {
         // m.write(System.out, "RDF/XML-ABBREV");
 
         // String res = VRNRequests.vrnLocInfoReq("Strasbourg");
-        String res = VRNRequests.vrnCoordToCoordTripReq(new Coord(7.77346f, 48.58808f), new Coord(7.94174f, 48.45923f), "1");
-        System.out.println("Response: " + res);
+        // String res = TriasRequests.coordToCoordTripReq(new Coord(8.38755106233198f, 49.01261399475719f), new Coord(8.41064385412417f, 49.00505228988602f), (short)1, RequestTargets.KVV_TRIAS);
+        String res = TriasRequests.stationToStationTripRequest("de:06431:256", "de:08221:1199", (short)1, RequestTargets.VRN_TRIAS);
+        System.out.println("Response Body:\n " + res);
     }
 }

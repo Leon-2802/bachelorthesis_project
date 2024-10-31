@@ -15,6 +15,9 @@
                     </LocationRef>
                 </Location>
                 <Params>
+                    <StopEventType>departure</StopEventType>
+                    <IncludePreviousCalls>false</IncludePreviousCalls> <!--Halte vor der gesuchten Haltestelle mitliefern?-->
+                    <IncludeOnwardCalls>false</IncludeOnwardCalls> <!--Halte nach der gesuchten Haltestelle mitliefern?-->
                     <IncludeRealtimeData>true</IncludeRealtimeData>
                 </Params>
             </StopEventRequest>

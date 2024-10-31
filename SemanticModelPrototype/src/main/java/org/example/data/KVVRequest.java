@@ -3,18 +3,26 @@ package org.example.data;
 import org.implementation.HelperFunctions;
 
 import javax.net.ssl.HttpsURLConnection;
+import org.w3c.dom.Document;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 
-public class KVVRequests {
-    private static String sendRequestKVV(String xmlRequest) {
+public class KVVRequest {
+    public static String sendRequest(Document xmlRequest) {
         try {
             // URL of the server endpoint
             String endpointUrl = "https://projekte.kvv-efa.de/gobberttrias/trias";
             URL url = new URL(endpointUrl);
+
+            // Insert requestor reference for authorization:
+            String authKey = HelperFunctions.readFiletoString("SemanticModelPrototype/src/main/java/org/implementation/kvvRequestorRef.txt", false);
+            xmlRequest.getElementsByTagName("siri:RequestorRef").item(0).setTextContent(authKey);
+
+            // Convert Document to String:
+            String xmlString = HelperFunctions.documentToString(xmlRequest);
 
             // Open a connection
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
@@ -30,7 +38,7 @@ public class KVVRequests {
 
             // Write the XML request to the output stream (-> send request)
             try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = xmlRequest.getBytes("utf-8");
+                byte[] input = xmlString.getBytes("utf-8");
                 os.write(input, 0, input.length);
             }
 
@@ -57,5 +65,4 @@ public class KVVRequests {
             return null;
         }
     }
-}
 }
