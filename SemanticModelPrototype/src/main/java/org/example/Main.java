@@ -3,6 +3,7 @@ package org.example;
 import org.example.data.RequestTargets;
 import org.example.data.TriasRequests;
 import org.implementation.Coord;
+import org.implementation.HelperFunctions;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,8 +19,8 @@ public class Main {
         // m.write(System.out, "RDF/XML-ABBREV");
 
         // String res = VRNRequests.vrnLocInfoReq("Strasbourg");
-        // String res = TriasRequests.coordToCoordTripReq(new Coord(8.38755106233198f, 49.01261399475719f), new Coord(8.41064385412417f, 49.00505228988602f), (short)1, RequestTargets.KVV_TRIAS);
-        String res = TriasRequests.stationToStationTripRequest("de:06431:256", "de:08221:1199", (short)1, RequestTargets.VRN_TRIAS);
+        // String res = TriasRequests.coordToCoordTripReq(new Coord(8.38755106233198f, 49.01261399475719f), new Coord(8.41064385412417f, 49.00505228988602f), HelperFunctions.getCurrentTime (), (short)1, RequestTargets.VRN_TRIAS);
+        String res = TriasRequests.stationToStationTripRequest("de:06431:256", "de:08221:1199", HelperFunctions.getCurrentTime(), (short)1, RequestTargets.KVV_TRIAS);
         System.out.println("Response Body:\n " + res);
     }
 }

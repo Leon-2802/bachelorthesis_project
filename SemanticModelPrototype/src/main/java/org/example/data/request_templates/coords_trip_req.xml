@@ -13,6 +13,7 @@
                             <Latitude>0</Latitude>
                         </GeoPosition>
                     </LocationRef>
+                    <DepArrTime>2024-09-25T11:30:00.000Z</DepArrTime>
                 </Origin>
                 <Destination>
                     <LocationRef>
@@ -23,7 +24,15 @@
                     </LocationRef>
                 </Destination>
                 <Params>
-                    <NumberOfResults>10</NumberOfResults>
+                    <WalkSpeed>150</WalkSpeed>
+                    <NumberOfResults>5</NumberOfResults>
+                    <InterchangeLimit>1</InterchangeLimit>
+                    <AlgorithmType>fastest</AlgorithmType>
+                    <!--					<AlgorithmType>fastest</AlgorithmType>
+                                        <AlgorithmType>leastCost</AlgorithmType>
+                                        <AlgorithmType>leastWalking</AlgorithmType>
+                                        <AlgorithmType>minChanges</AlgorithmType>-->
+                    <ItModesToCover>walk</ItModesToCover>
                     <IncludeTrackSections>false</IncludeTrackSections>
                     <IncludeIntermediateStops>false</IncludeIntermediateStops>
                     <IncludeLegProjection>false</IncludeLegProjection>

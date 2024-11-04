@@ -40,7 +40,7 @@ public class TriasRequests {
             return null;
         }
     }
-    public static String coordToCoordTripReq(Coord origin, Coord destination, short numOfResults, RequestTargets target) {
+    public static String coordToCoordTripReq(Coord origin, Coord destination, String depTime, short numOfResults, RequestTargets target) {
         try {
             // Load the XML template
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -55,6 +55,11 @@ public class TriasRequests {
             NodeList timestampNodes = (NodeList) xpath.evaluate("//siri:RequestTimestamp", document, XPathConstants.NODESET);
             if (timestampNodes.getLength() > 0) {
                 timestampNodes.item(0).setTextContent(HelperFunctions.getCurrentTime());
+            }
+            //... and Departure Time
+            NodeList depArrTimeNodes = (NodeList) xpath.evaluate("//Origin//DepArrTime", document, XPathConstants.NODESET);
+            if (depArrTimeNodes.getLength() > 0) {
+                depArrTimeNodes.item(0).setTextContent(depTime);
             }
 
             // Set coordinates of origin
@@ -97,7 +102,7 @@ public class TriasRequests {
         }
     }
 
-    public static String stationToStationTripRequest (String originStationRef, String destinationStationRef, short numOfResults, RequestTargets target) {
+    public static String stationToStationTripRequest (String originStationRef, String destinationStationRef, String depTime, short numOfResults, RequestTargets target) {
         try {
             // Load the XML template
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -112,6 +117,11 @@ public class TriasRequests {
             NodeList timestampNodes = (NodeList) xpath.evaluate("//siri:RequestTimestamp", document, XPathConstants.NODESET);
             if (timestampNodes.getLength() > 0) {
                 timestampNodes.item(0).setTextContent(HelperFunctions.getCurrentTime());
+            }
+            //... and Departure Time
+            NodeList depArrTimeNodes = (NodeList) xpath.evaluate("//Origin//DepArrTime", document, XPathConstants.NODESET);
+            if (depArrTimeNodes.getLength() > 0) {
+                depArrTimeNodes.item(0).setTextContent(depTime);
             }
 
             // Set station references

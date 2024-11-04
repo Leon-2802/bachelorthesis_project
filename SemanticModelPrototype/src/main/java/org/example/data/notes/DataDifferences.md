@@ -16,3 +16,6 @@
 ### Syntax
 
 ### Semantics
+- In Service section different semantics for values
+  - ie. PublishedLineName VRN: RB68; KVV: R-Bahn RB68
+  - In Attribute section different semantics: VRN writes affected LineName before information, KVV only the info 
