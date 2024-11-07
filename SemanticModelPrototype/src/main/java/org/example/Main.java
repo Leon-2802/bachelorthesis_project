@@ -1,9 +1,15 @@
 package org.example;
 
+import org.apache.jena.ontapi.model.OntClass;
+import org.apache.jena.ontapi.model.OntModel;
 import org.example.data.RequestTargets;
 import org.example.data.TriasRequests;
+import org.example.ontology.OntologyExample;
 import org.implementation.Coord;
 import org.implementation.HelperFunctions;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -15,8 +21,11 @@ public class Main {
         // RDFTutorial.containers(model);
 
         //Ontology:
-        // OntModel m = OntologyExample.loadModelFromString();
-        // m.write(System.out, "RDF/XML-ABBREV");
+        OntModel m = OntologyExample.loadModelFromString(HelperFunctions.readFiletoString("protege/public_transit_ontology.rdf", true));
+        // example operations on model:
+        Stream<OntClass.Named> classes = m.classes();
+        List<OntClass.Named> classList = classes.toList();
+        System.out.println("Classes: " + classList);
 
         //String res = TriasRequests.locInfoReq("Strasbourg", RequestTargets.VRN_TRIAS);
         // String res = TriasRequests.coordToCoordTripReq(new Coord(8.38755106233198f, 49.01261399475719f), new Coord(8.41064385412417f, 49.00505228988602f), HelperFunctions.getCurrentTime (), (short)1, RequestTargets.VRN_TRIAS);

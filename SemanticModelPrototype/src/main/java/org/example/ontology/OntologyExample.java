@@ -42,7 +42,7 @@ public class OntologyExample {
         OntModel m = OntModelFactory.createModel();
     }
 
-    public static OntModel loadModelFromString() {
+    public static OntModel loadModelFromString(String rdfString) {
         // Convert the RDF content string to an InputStream
         InputStream inputStream = new ByteArrayInputStream(rdfString.getBytes());
 
