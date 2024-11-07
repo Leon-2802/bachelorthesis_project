@@ -13,6 +13,10 @@
     - Allerdings bei VRN Trias-Situations am Anfang der Response enthalten
     - Bei KVV keine Situations und keine Fares, aber wieder die Extra Infos zu Service und Stop (Wie oben)
 
+- KVV + VRN Station to Station Trip Offenburg-Strasbourg
+  - Attributes nur für den RB angezeigt
+  - KVV keine DestinationStopPointRef in Frankreich, VRN ja
+
 ### Syntax
 
 ### Semantics

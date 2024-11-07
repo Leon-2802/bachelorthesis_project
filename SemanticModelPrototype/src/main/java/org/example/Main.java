@@ -18,9 +18,9 @@ public class Main {
         // OntModel m = OntologyExample.loadModelFromString();
         // m.write(System.out, "RDF/XML-ABBREV");
 
-        // String res = VRNRequests.vrnLocInfoReq("Strasbourg");
+        //String res = TriasRequests.locInfoReq("Strasbourg", RequestTargets.VRN_TRIAS);
         // String res = TriasRequests.coordToCoordTripReq(new Coord(8.38755106233198f, 49.01261399475719f), new Coord(8.41064385412417f, 49.00505228988602f), HelperFunctions.getCurrentTime (), (short)1, RequestTargets.VRN_TRIAS);
-        String res = TriasRequests.stationToStationTripRequest("de:06431:256", "de:08221:1199", HelperFunctions.getCurrentTime(), (short)1, RequestTargets.KVV_TRIAS);
+        String res = TriasRequests.stationToStationTripRequest("de:08317:14506", "fr:24067:58", HelperFunctions.getCurrentTime(), (short)1, RequestTargets.KVV_TRIAS);
         System.out.println("Response Body:\n " + res);
     }
 }
