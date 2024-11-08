@@ -21,9 +21,10 @@ public class Main {
         // RDFTutorial.containers(model);
 
         //Ontology:
-        OntModel m = OntologyExample.loadModelFromString(HelperFunctions.readFiletoString("protege/public_transit_ontology.rdf", true));
+        // OntModel m = OntologyExample.loadModelFromString(HelperFunctions.readFiletoString("protege/public_transit_ontology.rdf", true));
+        OntModel om = OntologyExample.loadModelFromFile("protege/public_transit_ontology.rdf");
         // example operations on model:
-        Stream<OntClass.Named> classes = m.classes();
+        Stream<OntClass.Named> classes = om.classes();
         List<OntClass.Named> classList = classes.toList();
         System.out.println("Classes: " + classList);
 
