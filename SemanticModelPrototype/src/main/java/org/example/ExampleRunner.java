@@ -5,14 +5,15 @@ import org.apache.jena.ontapi.model.OntModel;
 import org.example.data.RequestTargets;
 import org.example.data.TriasRequests;
 import org.example.ontology.OntologyExample;
-import org.implementation.Coord;
 import org.implementation.HelperFunctions;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-public class Main {
-    public static void main(String[] args) {
+public final class ExampleRunner {
+    private ExampleRunner() {}
+
+    public static void Run() {
         //JohnSmith johnSmithClass = new JohnSmith();
         // RDFTutorial.printModel(johnSmithClass.model);
         // Model model = RDFReader.readRDFFile("/Users/leonprivat/Documents/GitHub/bachelorthesis_project/SemanticModelPrototype/src/main/java/org/example/vc-db-1.rdf");

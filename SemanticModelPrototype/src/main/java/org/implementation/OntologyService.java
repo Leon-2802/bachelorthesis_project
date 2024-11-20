@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
 
 public final class OntologyService {
     private OntologyService() {}
-    
+
     private static final String ontRoot = "http://www.semanticweb.org/gobbertl/ontologies/public_transit_ontology#";
 
     public static void creatingOntologyModel() {
