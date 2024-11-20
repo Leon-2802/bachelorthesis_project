@@ -13,7 +13,8 @@ import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class HelperFunctions {
+public final class HelperFunctions {
+    private HelperFunctions() {}
     public static String documentToString(Document doc) throws Exception {
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer transformer = tf.newTransformer();
