@@ -6,3 +6,5 @@
 "de:08317:14506", "fr:24067:1284"
 #### 03 Bahnhof, Offenburg -> Starcoop, Strasbourg
 "de:08317:14506", "fr:24067:58"
+#### 03 Bahnhof, Offenburg -> Laiterie, Strasbourg
+"de:08317:14501", "fr:24067:1296"

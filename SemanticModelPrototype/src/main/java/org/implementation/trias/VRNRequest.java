@@ -1,25 +1,20 @@
-package org.example.data;
+package org.implementation.trias;
 
 import org.implementation.HelperFunctions;
 
 import javax.net.ssl.HttpsURLConnection;
 import org.w3c.dom.Document;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.URL;
 
-public class KVVRequest {
+public final class VRNRequest {
+    private VRNRequest() {}
+
     public static String sendRequest(Document xmlRequest) {
         try {
             // URL of the server endpoint
-            String endpointUrl = "https://projekte.kvv-efa.de/gobberttrias/trias";
+            String endpointUrl = "https://www.vrn.de/service/entwickler/trias-live/";
             URL url = new URL(endpointUrl);
-
-            // Insert requestor reference for authorization:
-            String authKey = HelperFunctions.readFiletoString("SemanticModelPrototype/src/main/java/org/implementation/kvvRequestorRef.txt", false);
-            xmlRequest.getElementsByTagName("siri:RequestorRef").item(0).setTextContent(authKey);
 
             // Convert Document to String:
             String xmlString = HelperFunctions.documentToString(xmlRequest);
@@ -30,6 +25,9 @@ public class KVVRequest {
             connection.setRequestMethod("POST");
             // Set the request content-type header to XML
             connection.setRequestProperty("Content-Type", "text/xml; utf-8");
+            // add Auth
+            String apiKey = HelperFunctions.readFiletoString("SemanticModelPrototype/src/main/java/org/implementation/vrnApiKey.txt", false);
+            connection.setRequestProperty("Authorization", apiKey);
             // Enable input and output streams
             connection.setDoOutput(true);
             // prevent connection from hanging indefinitely

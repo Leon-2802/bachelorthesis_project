@@ -8,8 +8,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
 import java.util.Map;
-
-public class GTFSLoader {
+enum RouteType {
+    BUS,
+    DEMAND_AND_RESPONSE_BUS
+}
+public final class GTFSLoader {
+    private GTFSLoader() {
+        // Private constructor to prevent instantiation
+    }
     /**
      * Loads GTFS data for a specific trip into an XML document.
      *

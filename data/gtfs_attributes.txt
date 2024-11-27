@@ -1,0 +1,4 @@
+Routes: route_type = type of transport
+Stops: location_type = type of stop location (0, 1, or 3)
+    0 = plattform/bus_stop -> see parent_station attribute for station
+    1 = station

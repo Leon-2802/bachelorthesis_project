@@ -31,6 +31,7 @@
                     <IncludeIntermediateStops>false</IncludeIntermediateStops>
                     <IncludeLegProjection>false</IncludeLegProjection>
                     <IncludeFares>true</IncludeFares>
+                    <IncludeRealtimeData>false</IncludeRealtimeData>
                 </Params>
             </TripRequest>
         </RequestPayload>

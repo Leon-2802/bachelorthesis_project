@@ -13,13 +13,10 @@ import org.w3c.dom.NodeList;
 public final class OntologyService {
     private OntologyService() {}
 
-    private static final String ontRoot = "http://www.semanticweb.org/gobbertl/ontologies/public_transit_ontology#";
+    private static final String ontRoot = "http://www.iiius.de/ontologies/public_transit_travel_information_ontology#";
 
-    public static void creatingOntologyModel() {
-        // An ontology model is an extension of the Jena RDF model, providing extra capabilities for handling ontologies
-        OntModel m = OntModelFactory.createModel();
-    }
     public static OntModel loadModelFromFile(String path) {
+        // An ontology model is an extension of the Jena RDF model, providing extra capabilities for handling ontologies
         OntModel model = OntModelFactory.createModel();
         model.read(path);
 

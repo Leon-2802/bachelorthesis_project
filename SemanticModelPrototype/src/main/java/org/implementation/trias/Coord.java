@@ -1,4 +1,4 @@
-package org.implementation;
+package org.implementation.trias;
 
 public class Coord {
     private float lon, lat;
