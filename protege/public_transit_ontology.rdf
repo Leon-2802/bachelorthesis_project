@@ -23,12 +23,31 @@
     
 
 
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasAlight -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasAlight">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasBoard -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasBoard">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDestination -->
 
     <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDestination">
         <owl:inverseOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isDestinationOf"/>
         <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
         <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+        <owl:propertyDisjointWith rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasOrigin"/>
     </owl:ObjectProperty>
     
 
@@ -37,6 +56,27 @@
 
     <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasOrigin">
         <owl:inverseOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isOriginOf"/>
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStop -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStop">
+        <owl:inverseOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isStopOf"/>
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTransitMode -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTransitMode">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
     </owl:ObjectProperty>
     
 
@@ -51,17 +91,54 @@
     
 
 
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegDestination -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegDestination">
+        <owl:inverseOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegDestinationOf"/>
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegOrigin -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegOrigin">
+        <owl:inverseOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegOriginOf"/>
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isDestinationOf -->
 
-    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isDestinationOf"/>
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isDestinationOf">
+        <owl:propertyDisjointWith rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isOriginOf"/>
+    </owl:ObjectProperty>
     
 
 
     <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isOriginOf -->
 
-    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isOriginOf">
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isOriginOf"/>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isStopOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isStopOf">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegDestinationOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegDestinationOf">
         <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
-        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
     </owl:ObjectProperty>
     
 
@@ -69,6 +146,15 @@
     <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegOf -->
 
     <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegOf"/>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegOriginOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegOriginOf">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+        <rdfs:range rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+    </owl:ObjectProperty>
     
 
 
@@ -83,11 +169,155 @@
     
 
 
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#bikesAllowed -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#bikesAllowed">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDistance -->
 
     <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDistance">
         <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDuration -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDuration">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasEndTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasEndTime">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInformation -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInformation">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchangeDuration -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchangeDuration">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#InterchangeLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchanges -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchanges">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasLine -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasLine">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasName">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasPlannedBay -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasPlannedBay">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasScheduledTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasScheduledTime">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStartTime -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStartTime">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStopID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStopID">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStopSequence -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStopSequence">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWalkDuration -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWalkDuration">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#ContinuousLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWheelchairBoarding -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWheelchairBoarding">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#wheelchairAccessible -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#wheelchairAccessible">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
     </owl:DatatypeProperty>
     
 
@@ -107,6 +337,14 @@
 
     <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#ContinuousLeg">
         <rdfs:subClassOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWalkDuration"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="en">continuous leg</rdfs:label>
     </owl:Class>
     
 
@@ -115,6 +353,15 @@
 
     <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#InterchangeLeg">
         <rdfs:subClassOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchangeDuration"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="de">Umstiegsabschnitt</rdfs:label>
+        <rdfs:label xml:lang="en">interchange leg</rdfs:label>
     </owl:Class>
     
 
@@ -124,16 +371,9 @@
     <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site">
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isDestinationOf"/>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasName"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isOriginOf"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="de">Ort</rdfs:label>
@@ -146,6 +386,20 @@
 
     <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint">
         <rdfs:subClassOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStopID"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWheelchairBoarding"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:label xml:lang="de">Haltestelle</rdfs:label>
         <rdfs:label xml:lang="en">stop point</rdfs:label>
     </owl:Class>
@@ -156,6 +410,64 @@
 
     <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg">
         <rdfs:subClassOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasAlight"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasBoard"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTransitMode"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInformation"/>
+                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasLine"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#bikesAllowed"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#wheelchairAccessible"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="en">timed leg</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes -->
+
+    <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes">
+        <rdfs:label xml:lang="de">Transportmittel</rdfs:label>
+        <rdfs:label xml:lang="en">transit modes</rdfs:label>
     </owl:Class>
     
 
@@ -166,7 +478,8 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLeg"/>
-                <owl:someValuesFrom rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
@@ -183,6 +496,41 @@
                 <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
             </owl:Restriction>
         </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDuration"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasEndTime"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchanges"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStartTime"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDistance"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:label xml:lang="de">Reise</rdfs:label>
         <rdfs:label xml:lang="en">trip</rdfs:label>
     </owl:Class>
@@ -194,14 +542,129 @@
     <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg">
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#isTripLegOf"/>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegDestination"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegOrigin"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="de">Reiseabschnitt</rdfs:label>
         <rdfs:label xml:lang="en">trip leg</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight -->
+
+    <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Board/Alight">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStop"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasPlannedBay"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasScheduledTime"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStopSequence"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:label xml:lang="en">Board/Alight</rdfs:label>
+        <rdfs:label xml:lang="de">Einstieg/Ausstieg</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Bus -->
+
+    <owl:NamedIndividual rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Bus">
+        <rdf:type rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+        <rdfs:label xml:lang="de">Bus</rdfs:label>
+        <rdfs:label xml:lang="en">bus</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#LongDistanceTrain -->
+
+    <owl:NamedIndividual rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#LongDistanceTrain">
+        <rdf:type rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+        <rdfs:label xml:lang="de">Fernzug</rdfs:label>
+        <rdfs:label xml:lang="en">long distance train</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#RegionalTrain -->
+
+    <owl:NamedIndividual rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#RegionalTrain">
+        <rdf:type rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+        <rdfs:label xml:lang="de">Regionalzug</rdfs:label>
+        <rdfs:label xml:lang="en">regional train</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Subway -->
+
+    <owl:NamedIndividual rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Subway">
+        <rdf:type rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+        <rdfs:label xml:lang="de">U-Bahn</rdfs:label>
+        <rdfs:label xml:lang="en">subway</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Tram -->
+
+    <owl:NamedIndividual rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Tram">
+        <rdf:type rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+        <rdfs:label xml:lang="de">Straßenbahn</rdfs:label>
+        <rdfs:label xml:lang="en">tram</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Demand&amp;ResponseBus -->
+
+    <owl:NamedIndividual rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Demand&amp;ResponseBus">
+        <rdf:type rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TransitModes"/>
+        <rdfs:label xml:lang="de">Ruftaxi</rdfs:label>
+        <rdfs:label xml:lang="en">demand and response bus</rdfs:label>
+    </owl:NamedIndividual>
     
 
 
@@ -219,6 +682,14 @@
             <rdf:Description rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#ContinuousLeg"/>
             <rdf:Description rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#InterchangeLeg"/>
             <rdf:Description rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TimedLeg"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Site"/>
+            <rdf:Description rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip"/>
+            <rdf:Description rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
         </owl:members>
     </rdf:Description>
 </rdf:RDF>

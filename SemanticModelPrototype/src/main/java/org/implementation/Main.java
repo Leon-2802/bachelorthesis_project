@@ -1,14 +1,40 @@
 package org.implementation;
 
+import org.apache.jena.ontapi.model.OntModel;
 import org.implementation.trias.TriasRequests;
-import org.implementation.trias.request_templates.RequestTargets;
+import org.implementation.trias.RequestTargets;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        // load the OWL public transit ontology from file and intitialize the Ontology Service class:
+        OntModel om = HelperFunctions.loadModelFromFile("protege/public_transit_ontology.rdf");
+        // create the Ontology Service instance for the Ontology Model:
+        OntologyService ontService = new OntologyService(om);
+
+        // send the trip request from Planetarium, Mannheim to Volkshochschule, Heidelberg
         TriasRequests tr = new TriasRequests();
-        //String res = tr.locInfoReq("Hochschule Offenburg", RequestTargets.VRN_TRIAS);
-        // String res = tr.coordToCoordTripReq(new Coord(8.38755106233198f, 49.01261399475719f), new Coord(8.41064385412417f, 49.00505228988602f), HelperFunctions.getCurrentTime (), (short)1, true, RequestTargets.VRN_TRIAS);
-        String res = tr.stationToStationTripRequest("de:08317:14501", "fr:24067:1296", HelperFunctions.getCurrentTime(), (short)1, true, RequestTargets.VRN_TRIAS);
+        String res = tr.stationToStationTripRequest("de:08222:2453", "de:08221:1199", HelperFunctions.getCurrentTime(), (short)1, true, RequestTargets.VRN_TRIAS);
         System.out.println("Response Body:\n " + res);
+
+        try {
+            Document resDoc = HelperFunctions.stringToDocument(res, true);
+            ontService.mapTriasResToOntology(resDoc);
+            // Test Query:
+            SparQLService.sendQuery(om);
+        }
+        catch (ParserConfigurationException ex) {
+            System.out.println("ParserConfigurationException: " + ex.getMessage());
+        }
+        catch (SAXException ex) {
+            System.out.println("SAXException: " + ex.getMessage());
+        }
+        catch (IOException ex) {
+            System.out.println("IOException: " + ex.getMessage());
+        }
     }
 }

@@ -30,7 +30,7 @@
                     <IncludeTrackSections>false</IncludeTrackSections>
                     <IncludeIntermediateStops>false</IncludeIntermediateStops>
                     <IncludeLegProjection>false</IncludeLegProjection>
-                    <IncludeFares>true</IncludeFares>
+                    <IncludeFares>false</IncludeFares>
                     <IncludeRealtimeData>false</IncludeRealtimeData>
                 </Params>
             </TripRequest>

@@ -1,4 +1,4 @@
-package org.implementation.trias.request_templates;
+package org.implementation.trias;
 
 public enum RequestTargets {
     VRN_TRIAS,

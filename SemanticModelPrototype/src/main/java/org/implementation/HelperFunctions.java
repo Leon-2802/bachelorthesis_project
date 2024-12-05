@@ -1,9 +1,14 @@
 package org.implementation;
 
+import org.apache.jena.ontapi.OntModelFactory;
+import org.apache.jena.ontapi.model.OntModel;
 import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -15,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 
 public final class HelperFunctions {
     private HelperFunctions() {}
+
     public static String documentToString(Document doc) throws Exception {
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer transformer = tf.newTransformer();
@@ -26,6 +32,14 @@ public final class HelperFunctions {
         StringWriter writer = new StringWriter();
         transformer.transform(new DOMSource(doc), new StreamResult(writer));
         return writer.getBuffer().toString();
+    }
+
+    public static Document stringToDocument(String xmlStr, boolean namespaceAware) throws ParserConfigurationException, SAXException, IOException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(namespaceAware);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document doc = builder.parse(new InputSource(new StringReader(xmlStr)));
+        return doc;
     }
 
     public static String formatXML(String xmlString) throws Exception {
@@ -45,6 +59,14 @@ public final class HelperFunctions {
         transformer.transform(new DOMSource(document), new StreamResult(writer));
 
         return writer.toString();
+    }
+
+    public static OntModel loadModelFromFile(String path) {
+        // An ontology model is an extension of the Jena RDF model, providing extra capabilities for handling ontologies
+        OntModel model = OntModelFactory.createModel();
+        model.read(path);
+
+        return model;
     }
 
     public static String readFiletoString(String path, boolean addLineSeparator) {

@@ -1,0 +1,207 @@
+# baseURI: http://vdv.de/ofi/context#
+# imports: http://vdv.de/ofi/accessibility#
+# imports: http://vdv.de/ofi/ontology#
+# imports: http://vdv.de/ofi/poi#
+# imports: http://vdv.de/ofi/weather#
+
+@prefix :        <http://vdv.de/ofi/context#> .
+@prefix accessibility:  <http://vdv.de/ofi/accessibility#> .
+@prefix ofi:     <http://vdv.de/ofi/ontology#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix poi:     <http://vdv.de/ofi/poi#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix weather:  <http://vdv.de/ofi/weather#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+:     rdf:type owl:Ontology ;
+      owl:imports <http://vdv.de/ofi/ontology#> , <http://vdv.de/ofi/weather#> , <http://vdv.de/ofi/poi#> , <http://vdv.de/ofi/accessibility#> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+:AccessibilityContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "An accessibility context element describes context information concerning accessibility. For this, it may reference AccessibilityRequirements using refersToAccessibilityRequirements. If it is used for a UserContext, this may, for example, describe the accessibility needs of the user."@en ;
+      rdfs:label "accessibility context element"@en , "Kontextelement Barrierefreiheit"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:ContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "A context element is an element that describes a context factor. Subclasses of this class may define specific context factors that can be combined to describe a user's context, for example. A context element may use the property refersTo or one of its subproperties to refer to a fact/information that is used as contextual information. A context element also may have a priority for context-aware computations (hasPriority), a given data source (hasSource) and a timestamp when it was last modified (lastModified)."@en ;
+      rdfs:label "context element"@en , "Kontextelement"@de .
+
+:Device
+      rdf:type owl:Class ;
+      rdfs:label "interaction device"@en , "Interaktionsgerät"@de ;
+      rdfs:subClassOf owl:Thing .
+
+:InteractionContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "An interaction context element may refer to devices that are availiable for interaction and therefore describe an interaction context."@en ;
+      rdfs:label "interaction context element"@en , "Kontextelement Interaktionskontext"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:LocationContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "A location context element used in a UserContext describes the location of a user. It therefore refers to a Location, but may also refer to a site (e.g. stop place)."@en ;
+      rdfs:label "location context element"@en , "Ortskontextelement"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:Person
+      rdf:type owl:Class ;
+      rdfs:comment "A person that may have a user context. Is identified via hasID."@en ;
+      rdfs:label "person"@en , "Person"@de .
+
+:PreferenceContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "This context element describes user preferences. It may use refersToCuisine to describe preferred cuisines, refersToExhibitionTopic, to describe preferred topics in museums, refersToTourBudget, to describe an available budget and refersToSmokingRegulation to describe smoking preferences. May be extended as needed."@en ;
+      rdfs:label "preference context"@en , "Kontext der Nutzerpräferenzen"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:Task
+      rdf:type owl:Class ;
+      rdfs:comment "A task of a user."@en ;
+      rdfs:label "task"@en , "Aufgabe"@de ;
+      rdfs:subClassOf owl:Thing .
+
+:TaskContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "A task context element may refer to a task of the user."@en ;
+      rdfs:label "task context element"@en , "Aufgabenkontext"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:TripContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "A trip context element describes a public transport trip a user is currently travelling."@en ;
+      rdfs:label "trip context element"@en , "Verbindungskontext"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:UserContext
+      rdf:type owl:Class ;
+      rdfs:comment "A UserContext element describes the context information known about a person for a specific time. It therefore assembles different context elements using hasContextElement."@en ;
+      rdfs:label "user context"@en , "Benutzerkontext"@de .
+
+:WeatherContextElement
+      rdf:type owl:Class ;
+      rdfs:comment "A weather context element describes the current weather."@en ;
+      rdfs:label "weather context element"@en , "Wetterkontext"@de ;
+      rdfs:subClassOf :ContextElement .
+
+:hasContextElement
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :UserContext ;
+      rdfs:label "has context element"@en , "Kontextelement"@de ;
+      rdfs:range :ContextElement .
+
+:hasID
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Person ;
+      rdfs:label "has ID"@en , "ID"@de ;
+      rdfs:range xsd:string .
+
+:hasPriority
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :ContextElement ;
+      rdfs:label "has priority"@en , "Priorität"@de ;
+      rdfs:range xsd:integer .
+
+:hasSource
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :ContextElement ;
+      rdfs:label "has source"@en , "Datenquelle"@de ;
+      rdfs:range xsd:string .
+
+:hasUserContext
+      rdf:type owl:ObjectProperty , owl:FunctionalProperty ;
+      rdfs:comment "A person may have a user context."@en ;
+      rdfs:domain :Person ;
+      rdfs:label "has user context"@en , "Nutzerkontext"@de ;
+      rdfs:range :UserContext .
+
+:lastModified
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :ContextElement ;
+      rdfs:label "last modified"@en , "letzte Änderung"@de ;
+      rdfs:range xsd:dateTime .
+
+:refersTo
+      rdf:type owl:ObjectProperty ;
+      rdfs:comment "A context element refers to a fact or information that is then interpreted as contextual information. The subproperties are used for specified context elements."@en ;
+      rdfs:domain :ContextElement ;
+      rdfs:label "refers to"@en , "Bezug auf"@de .
+
+:refersToAccessibilityRequirement
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :AccessibilityContextElement ;
+      rdfs:label "refers to accessibility requirement"@en , "Barrierefreiheitskontext"@de ;
+      rdfs:range accessibility:AccessibilityRequirement ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToCuisine
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :PreferenceContextElement ;
+      rdfs:label "Präferenz für Mahlzeiten"@de , "cuisine preference"@en ;
+      rdfs:range poi:Cuisine ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToDevice
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :InteractionContextElement ;
+      rdfs:label "refers to device"@en , "verfügbare Interaktionsgeräte"@de ;
+      rdfs:range :Device ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToExhibitionTopic
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :PreferenceContextElement ;
+      rdfs:label "Vorlieben für Museen"@de , "museum preferences"@en ;
+      rdfs:range poi:ExhibitionTopic ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToLocation
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :LocationContextElement ;
+      rdfs:label "refers to location"@en , "Ortsbezug"@de ;
+      rdfs:range ofi:Location ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToSite
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :LocationContextElement ;
+      rdfs:label "refers to site"@en , "Ortskontext"@de ;
+      rdfs:range ofi:Site ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToSmokingRegulation
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :PreferenceContextElement ;
+      rdfs:label "refers to smoking regulation"@en ;
+      rdfs:range poi:SmokingRegulation ;
+      rdfs:subPropertyOf :refersTo ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger .
+
+:refersToTask
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :TaskContextElement ;
+      rdfs:label "refers to task"@en , "Aufgabenkontext"@de ;
+      rdfs:range :Task ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToTourBudget
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :PreferenceContextElement ;
+      rdfs:label "refers to tour budget"@en , "verfügbares Budget für Tour"@de ;
+      rdfs:range xsd:integer .
+
+:refersToTrip
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :TripContextElement ;
+      rdfs:label "refers to trip"@en , "Verbindungskontext"@de ;
+      rdfs:range ofi:Trip ;
+      rdfs:subPropertyOf :refersTo .
+
+:refersToWeather
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :WeatherContextElement ;
+      rdfs:label "refers to weather"@en , "Wetterkontext"@de ;
+      rdfs:range weather:Weather ;
+      rdfs:subPropertyOf :refersTo .

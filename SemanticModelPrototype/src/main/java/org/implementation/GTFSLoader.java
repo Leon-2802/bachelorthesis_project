@@ -8,10 +8,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.util.List;
 import java.util.Map;
+
 enum RouteType {
     BUS,
     DEMAND_AND_RESPONSE_BUS
 }
+
 public final class GTFSLoader {
     private GTFSLoader() {
         // Private constructor to prevent instantiation
@@ -91,4 +93,3 @@ public final class GTFSLoader {
         return doc;
     }
 }
-
