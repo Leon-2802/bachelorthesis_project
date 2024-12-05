@@ -14,7 +14,7 @@ public class Main {
         // load the OWL public transit ontology from file and intitialize the Ontology Service class:
         OntModel om = HelperFunctions.loadModelFromFile("protege/public_transit_ontology.rdf");
         // create the Ontology Service instance for the Ontology Model:
-        OntologyService ontService = new OntologyService(om);
+        TriasOntologyService triasOntService = new TriasOntologyService(om);
 
         // send the trip request from Planetarium, Mannheim to Volkshochschule, Heidelberg
         TriasRequests tr = new TriasRequests();
@@ -23,7 +23,7 @@ public class Main {
 
         try {
             Document resDoc = HelperFunctions.stringToDocument(res, true);
-            ontService.mapTriasResToOntology(resDoc);
+            triasOntService.mapTriasResToOntology(resDoc);
             // Test Query:
             SparQLService.sendQuery(om);
         }
@@ -35,6 +35,9 @@ public class Main {
         }
         catch (IOException ex) {
             System.out.println("IOException: " + ex.getMessage());
+        }
+        catch (IllegalArgumentException ex) {
+            System.out.println("IllegalArgumentException: " + ex.getMessage());
         }
     }
 }
