@@ -4,16 +4,16 @@ import org.apache.jena.ontapi.model.OntModel;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
-import org.implementation.ontologyClasses.ContinuousLeg;
-import org.implementation.ontologyClasses.InterchangeLeg;
-import org.implementation.ontologyClasses.Site;
-import org.implementation.ontologyClasses.StopPoint;
+import org.implementation.ontologyClasses.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.namespace.NamespaceContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -21,13 +21,15 @@ import javax.xml.xpath.XPathFactory;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.time.format.ResolverStyle;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class TriasOntologyService {
     private Document triasDocument;
     private final OntModel model;
     private final XPath xPath;
+    private final DocumentBuilder docBuilder;
     public TriasOntologyService(OntModel model) {
         this.model = model;
         NamespaceContext nsContext = new NamespaceContext() {
@@ -55,6 +57,12 @@ public class TriasOntologyService {
         XPathFactory xpathFactory = XPathFactory.newInstance();
         this.xPath = xpathFactory.newXPath();
         this.xPath.setNamespaceContext(nsContext);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            this.docBuilder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static final String ontRoot = Constants.ontRoot;
@@ -62,7 +70,7 @@ public class TriasOntologyService {
     public void mapTriasResToOntology(Document doc) {
         this.triasDocument = doc;
 
-        Node tripNode = getNodeByPath("//trias:Trip");
+        Node tripNode = getNodeByPath("//trias:Trip", this.triasDocument);
         if (tripNode.getNodeType() == Node.ELEMENT_NODE) {
             Element tripElement = (Element) tripNode;
 
@@ -109,10 +117,59 @@ public class TriasOntologyService {
                 Property hasWalkDuration = model.getProperty(ontRoot + "hasWalkDuration");
                 Property hasInterchangeDuration = model.getProperty(ontRoot + "hasInterchangeDuration");
                 Property hasTripLeg = model.getProperty(ontRoot + "hasTripLeg");
+                Property bikesAllowed = model.getProperty(ontRoot + "bikesAllowed");
+                Property hasInformation = model.getProperty(ontRoot + "hasInformation");
+                Property hasLine = model.getProperty(ontRoot + "hasLine");
+                Property wheelchairAccessible = model.getProperty(ontRoot + "wheelchairAccessible");
+                Property hasTransitMode = model.getProperty(ontRoot + "hasTransitMode");
+                Property hasStop = model.getProperty(ontRoot + "hasStop");
+                Property hasStopSequence = model.getProperty(ontRoot + "hasStopSequence");
+                Property hasPlannedBay = model.getProperty(ontRoot + "hasPlannedBay");
+                Property hasScheduledTime = model.getProperty(ontRoot + "hasScheduledTime");
+                Property hasBoard = model.getProperty(ontRoot + "hasBoard");
+                Property hasAlight = model.getProperty(ontRoot + "hasAlight");
 
                 switch (legType) {
                     case "TimedLeg":
-                        handleTimedLeg(tripLegElement);
+                        TimedLeg timedLeg = handleTimedLeg(tripLegElement);
+
+                        Resource originTimed = model.createResource(ontRoot + "OriginStopPointForTripLeg" + tripLegId);
+                        originTimed.addProperty(RDF.type, model.getResource(ontRoot + "StopPoint"));
+                        originTimed.addLiteral(hasName, timedLeg.getOrigin().getName());
+                        originTimed.addLiteral(hasStopID, timedLeg.getOrigin().getStopID());
+                        tripLeg.addProperty(hasOrigin, originTimed);
+
+                        Resource destinationTimed = model.createResource(ontRoot + "DestinationStopPointForTripLeg" + tripLegId);
+                        destinationTimed.addProperty(RDF.type, model.getResource(ontRoot + "StopPoint"));
+                        destinationTimed.addLiteral(hasName, timedLeg.getDestination().getName());
+                        destinationTimed.addLiteral(hasStopID, timedLeg.getDestination().getStopID());
+                        tripLeg.addProperty(hasDestination, destinationTimed);
+
+                        // board and alight:
+                        Resource board = model.createResource(ontRoot + "BoardForTripLeg" + tripLegId);
+                        board.addProperty(RDF.type, model.getResource(ontRoot + "BoardAlight"));
+                        board.addProperty(hasStop, originTimed);
+                        board.addLiteral(hasStopSequence, timedLeg.getBoard().getStopSequence());
+                        board.addLiteral(hasPlannedBay, timedLeg.getBoard().getPlannedBay());
+                        board.addLiteral(hasScheduledTime, timedLeg.getBoard().getScheduledTime());
+                        tripLeg.addProperty(hasBoard, board);
+
+                        Resource alight = model.createResource(ontRoot + "AlightForTripLeg" + tripLegId);
+                        alight.addProperty(RDF.type, model.getResource(ontRoot + "BoardAlight"));
+                        alight.addProperty(hasStop, destinationTimed);
+                        alight.addLiteral(hasStopSequence, timedLeg.getAlight().getStopSequence());
+                        alight.addLiteral(hasPlannedBay, timedLeg.getAlight().getPlannedBay());
+                        alight.addLiteral(hasScheduledTime, timedLeg.getAlight().getScheduledTime());
+                        tripLeg.addProperty(hasAlight, alight);
+
+                        Resource transitMode = model.getResource(ontRoot + timedLeg.getTransitMode());
+                        tripLeg.addProperty(hasTransitMode, transitMode);
+                        tripLeg.addLiteral(hasLine, timedLeg.getLine());
+                        for (int j = 0; j < timedLeg.getInformation().size(); j++) {
+                            tripLeg.addLiteral(hasInformation, timedLeg.getInformation().get(j));
+                        }
+                        // check for bikesAllowed and wheelchairAccessible
+
                         break;
                     case "ContinuousLeg":
                         ContinuousLeg continuousLeg = handleContinuousLeg(tripLegElement);
@@ -152,7 +209,6 @@ public class TriasOntologyService {
                         throw new IllegalArgumentException("Unsupported leg type: " + legType);
                 }
 
-                // Add the hasTripLeg property to the trip, referencing the TripLeg
                 trip.addProperty(hasTripLeg, tripLeg);
             }
 
@@ -168,8 +224,51 @@ public class TriasOntologyService {
         }
     }
 
-    private void handleTimedLeg(Element timedLeg) {
+    private TimedLeg handleTimedLeg(Element timedLeg) {
+        BoardAlight board = createBoardAlight((Element) timedLeg.getElementsByTagName("trias:LegBoard").item(0), true);
+        BoardAlight alight = createBoardAlight((Element) timedLeg.getElementsByTagName("trias:LegAlight").item(0), false);
 
+        // get Line Name
+        Element service = (Element) timedLeg.getElementsByTagName("trias:Service").item(0);
+        Element lineName = (Element) service.getElementsByTagName("trias:PublishedLineName").item(0);
+        String lineNameText = lineName == null? "" : getElementChild(lineName, "trias:Text", 0).getTextContent();
+        // add destination of line
+        Element destination = (Element) service.getElementsByTagName("trias:DestinationText").item(0);
+        String destinationText = destination == null? "" : getElementChild(destination, "trias:Text", 0).getTextContent();
+        lineNameText += (", Richtung: " + destinationText);
+        System.out.println("Line Name: " + lineNameText);
+
+        // get Transit Mode
+        Element serviceSection = (Element) timedLeg.getElementsByTagName("trias:ServiceSection").item(0);
+        Element mode = (Element) serviceSection.getElementsByTagName("trias:Mode").item(0);
+        Element ptMode = (Element) getElementChild(mode, "trias:PtMode", 0);
+        String transitMode = "UnknownTransitMode";
+        if(ptMode != null) {
+            transitMode = matchTransitMode(ptMode);
+        }
+
+        // get Information
+        List<String> information = new ArrayList<String>();
+        boolean bikesAllowed = false;
+        boolean wheelchairAccessible = false;
+        NodeList attributes = service.getElementsByTagName("trias:Attribute");
+        for (int i = 0; i < attributes.getLength(); i++) {
+            Element attribute = (Element) attributes.item(i);
+            Element attributetextWrapper = (Element) attribute.getElementsByTagName("trias:Text").item(0);
+            String attributeValue = attributetextWrapper.getElementsByTagName("trias:Text").item(0).getTextContent();
+            information.add(attributeValue);
+            if (attributeValue.contains("Fahrradmitnahme begrenzt möglich") || attributeValue.contains("Fahrradmitnahme möglich")) {
+                bikesAllowed = true;
+            }
+            if (attributeValue.contains("Fahrzeuggebundene Einstiegshilfe vorhanden")) {
+                wheelchairAccessible = true;
+            }
+        }
+
+        TimedLeg timedLegInstance = new TimedLeg(board.getStopPoint(), alight.getStopPoint(), board, alight, lineNameText, transitMode, information);
+        //timedLegInstance.setWheelchairAccessible(wheelchairAccessible);
+        //timedLegInstance.setBikesAllowed(bikesAllowed);
+        return timedLegInstance;
     }
     private ContinuousLeg handleContinuousLeg(Element continuousLeg) {
         Element legStart = (Element) continuousLeg.getElementsByTagName("trias:LegStart").item(0);
@@ -218,9 +317,52 @@ public class TriasOntologyService {
         }
     }
 
-    private Node getNodeByPath(String path) {
+    private BoardAlight createBoardAlight(Element legBoardAlight, boolean board) {
+        // Extract the data
+        String stopPointRefText = getElementChild(legBoardAlight, "trias:StopPointRef", 0).getTextContent();
+        Node stopPointName = getElementChild(legBoardAlight, "trias:StopPointName", 0);
+        String stopPointNameText = stopPointName == null? "" : getElementChild((Element) stopPointName, "trias:Text", 0).getTextContent();
+        Node plannedBay = getElementChild(legBoardAlight, "trias:PlannedBay", 0);
+        String plannedBayText = plannedBay == null? "" : getElementChild((Element) plannedBay, "trias:Text", 0).getTextContent();
+        String serviceTagName = board ? "trias:ServiceDeparture" : "trias:ServiceArrival";
+        Node serviceDepartureArrival = getElementChild(legBoardAlight, serviceTagName, 0);
+        String timetabledTimeText = serviceDepartureArrival == null? "" : getElementChild((Element) serviceDepartureArrival, "trias:TimetabledTime", 0).getTextContent();
+        String stopSeqNumber = getElementChild(legBoardAlight, "trias:StopSeqNumber", 0).getTextContent();
+
+        StopPoint stopPoint = new StopPoint(stopPointNameText, stopPointRefText);
+
+        return new BoardAlight(stopPoint, timetabledTimeText, plannedBayText, stopSeqNumber);
+    }
+
+    private String matchTransitMode(Element triasMode) {
+        switch (triasMode.getTextContent()) {
+            case "bus", "coach":
+                return "Bus";
+            case "tram":
+                return "Tram";
+            case "rail", "urbanRail":
+                return "RegionalTrain";
+            case "intercity":
+                return "LongDistanceTrain";
+            case "metro":
+                return "Subway";
+
+            default:
+                return "UnknownTransitMode";
+        }
+    }
+
+    private static Node getElementChild(Element parent, String tagName, int index) {
+        NodeList nodeList = parent.getElementsByTagName(tagName);
+        if (nodeList.getLength() > 0) {
+            return nodeList.item(index);
+        }
+        return null;
+    }
+
+    private Node getNodeByPath(String path, Document document) {
         try {
-            NodeList nodes = (NodeList) this.xPath.evaluate(path, this.triasDocument, XPathConstants.NODESET);
+            NodeList nodes = (NodeList) this.xPath.evaluate(path, document, XPathConstants.NODESET);
             if (nodes.getLength() > 0) {
                 return nodes.item(0);
             } else {

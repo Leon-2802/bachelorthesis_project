@@ -9,19 +9,42 @@ public final class SparQLService {
 
     public static void sendQuery(OntModel model) {
         String queryString =
-            "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
-            "PREFIX owl: <http://www.w3.org/2002/07/owl#> " +
-            "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#> " +
-            "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> " +
-            "PREFIX j0: <" + Constants.ontRoot + "> " + // Change to your ontology's namespace
-            "SELECT ?trip ?hasInterchanges ?hasEndTime ?hasStartTime ?hasDuration " +
-            "WHERE { " +
-            "  ?trip rdf:type j0:Trip . " +
-            "  ?trip j0:hasInterchanges ?hasInterchanges . " +
-            "  ?trip j0:hasEndTime ?hasEndTime . " +
-            "  ?trip j0:hasStartTime ?hasStartTime . " +
-            "  ?trip j0:hasDuration ?hasDuration . " +
-            "}";
+            "PREFIX j0: <http://www.iiius.de/ontologies/public_transit_travel_information_ontology#>\n" +
+                    "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" +
+                    "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
+                    "\n" +
+                    "SELECT ?trip ?legType ?walkDuration ?originStopID ?originStopName ?destinationStopID ?destinationStopName ?line ?transitMode ?scheduledTime ?plannedBay ?stopSequence ?info\n" +
+                    "WHERE {\n" +
+                    "  ?trip rdf:type j0:Trip ;\n" +
+                    "        j0:hasTripLeg ?leg .\n" +
+                    "  \n" +
+                    "  ?leg rdf:type ?legType .\n" +
+                    "  \n" +
+                    "  OPTIONAL { ?leg j0:hasWalkDuration ?walkDuration . }\n" +
+                    "  OPTIONAL { \n" +
+                    "    ?leg j0:hasTripLegOrigin ?origin .\n" +
+                    "    ?origin j0:hasStopID ?originStopID .\n" +
+                    "    ?origin j0:hasName ?originStopName .\n" +
+                    "  }\n" +
+                    "  OPTIONAL { \n" +
+                    "    ?leg j0:hasTripLegDestination ?destination .\n" +
+                    "    ?destination j0:hasStopID ?destinationStopID .\n" +
+                    "    ?destination j0:hasName ?destinationStopName .\n" +
+                    "  }\n" +
+                    "  OPTIONAL { ?leg j0:hasLine ?line . }\n" +
+                    "  OPTIONAL { \n" +
+                    "    ?leg j0:hasTransitMode ?mode .\n" +
+                    "    ?mode rdfs:label ?transitMode .\n" +
+                    "  }\n" +
+                    "  OPTIONAL { \n" +
+                    "    ?leg j0:hasBoard ?board .\n" +
+                    "    ?board j0:hasScheduledTime ?scheduledTime ;\n" +
+                    "           j0:hasPlannedBay ?plannedBay ;\n" +
+                    "           j0:hasStopSequence ?stopSequence .\n" +
+                    "  }\n" +
+                    "  OPTIONAL { ?leg j0:hasInformation ?info . }\n" +
+                    "}\n" +
+                    "ORDER BY ?trip ?legType ?scheduledTime\n";
 
         // Create and execute the query
         Query query = QueryFactory.create(queryString);
