@@ -8,8 +8,6 @@ public class TimedLeg  extends TripLeg{
     private String line;
     private String transitMode;
     private List<String> information;
-    private boolean wheelchairAccessible;
-    private boolean bikesAllowed;
 
     public TimedLeg(StopPoint origin, StopPoint destination, BoardAlight board, BoardAlight alight, String line, String transitMode, List<String> information) {
         super(origin, destination);
@@ -58,21 +56,5 @@ public class TimedLeg  extends TripLeg{
 
     public void setInformation(List<String> information) {
         this.information = information;
-    }
-
-    public boolean isWheelchairAccessible() {
-        return wheelchairAccessible;
-    }
-
-    public void setWheelchairAccessible(boolean wheelchairAccessible) {
-        this.wheelchairAccessible = wheelchairAccessible;
-    }
-
-    public boolean isBikesAllowed() {
-        return bikesAllowed;
-    }
-
-    public void setBikesAllowed(boolean bikesAllowed) {
-        this.bikesAllowed = bikesAllowed;
     }
 }

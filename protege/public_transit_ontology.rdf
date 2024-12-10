@@ -293,6 +293,15 @@
     
 
 
+    <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegSequenceID -->
+
+    <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegSequenceID">
+        <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWalkDuration -->
 
     <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasWalkDuration">
@@ -469,20 +478,6 @@
                 <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#bikesAllowed"/>
-                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#wheelchairAccessible"/>
-                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
-                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
         <rdfs:label xml:lang="en">timed leg</rdfs:label>
     </owl:Class>
     
@@ -577,6 +572,13 @@
                 <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegOrigin"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLegSequenceID"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="de">Reiseabschnitt</rdfs:label>

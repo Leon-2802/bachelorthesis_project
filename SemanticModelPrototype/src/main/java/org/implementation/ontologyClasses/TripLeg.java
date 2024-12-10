@@ -1,6 +1,7 @@
 package org.implementation.ontologyClasses;
 
 public class TripLeg {
+
     protected StopPoint origin;
     protected StopPoint destination;
     public TripLeg(StopPoint origin, StopPoint destination) {

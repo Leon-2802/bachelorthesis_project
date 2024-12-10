@@ -108,6 +108,8 @@ public class TriasOntologyService {
                 // Create a resource for each TripLeg
                 Resource tripLeg = model.createResource(ontRoot + "TripLeg" + tripLegId);
                 tripLeg.addProperty(RDF.type, model.getResource(ontRoot + legType));
+                Property hasTripLegSequenceID = model.getProperty(ontRoot + "hasTripLegSequenceID");
+                tripLeg.addLiteral(hasTripLegSequenceID, tripLegId);
 
                 // store ontology properties:
                 Property hasName = model.getProperty(ontRoot + "hasName");
@@ -168,8 +170,6 @@ public class TriasOntologyService {
                         for (int j = 0; j < timedLeg.getInformation().size(); j++) {
                             tripLeg.addLiteral(hasInformation, timedLeg.getInformation().get(j));
                         }
-                        // check for bikesAllowed and wheelchairAccessible
-
                         break;
                     case "ContinuousLeg":
                         ContinuousLeg continuousLeg = handleContinuousLeg(tripLegElement);
@@ -235,8 +235,7 @@ public class TriasOntologyService {
         // add destination of line
         Element destination = (Element) service.getElementsByTagName("trias:DestinationText").item(0);
         String destinationText = destination == null? "" : getElementChild(destination, "trias:Text", 0).getTextContent();
-        lineNameText += (", Richtung: " + destinationText);
-        System.out.println("Line Name: " + lineNameText);
+        lineNameText += (", Direction: " + destinationText);
 
         // get Transit Mode
         Element serviceSection = (Element) timedLeg.getElementsByTagName("trias:ServiceSection").item(0);
@@ -249,26 +248,15 @@ public class TriasOntologyService {
 
         // get Information
         List<String> information = new ArrayList<String>();
-        boolean bikesAllowed = false;
-        boolean wheelchairAccessible = false;
         NodeList attributes = service.getElementsByTagName("trias:Attribute");
         for (int i = 0; i < attributes.getLength(); i++) {
             Element attribute = (Element) attributes.item(i);
             Element attributetextWrapper = (Element) attribute.getElementsByTagName("trias:Text").item(0);
             String attributeValue = attributetextWrapper.getElementsByTagName("trias:Text").item(0).getTextContent();
             information.add(attributeValue);
-            if (attributeValue.contains("Fahrradmitnahme begrenzt möglich") || attributeValue.contains("Fahrradmitnahme möglich")) {
-                bikesAllowed = true;
-            }
-            if (attributeValue.contains("Fahrzeuggebundene Einstiegshilfe vorhanden")) {
-                wheelchairAccessible = true;
-            }
         }
 
-        TimedLeg timedLegInstance = new TimedLeg(board.getStopPoint(), alight.getStopPoint(), board, alight, lineNameText, transitMode, information);
-        //timedLegInstance.setWheelchairAccessible(wheelchairAccessible);
-        //timedLegInstance.setBikesAllowed(bikesAllowed);
-        return timedLegInstance;
+        return new TimedLeg(board.getStopPoint(), alight.getStopPoint(), board, alight, lineNameText, transitMode, information);
     }
     private ContinuousLeg handleContinuousLeg(Element continuousLeg) {
         Element legStart = (Element) continuousLeg.getElementsByTagName("trias:LegStart").item(0);

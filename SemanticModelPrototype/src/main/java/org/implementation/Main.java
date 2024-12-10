@@ -13,6 +13,12 @@ public class Main {
     public static void main(String[] args) {
         // load the OWL public transit ontology from file and intitialize the Ontology Service class:
         OntModel om = HelperFunctions.loadModelFromFile("protege/public_transit_ontology.rdf");
+        runTriasExample(om);
+        // runGTFSExample();
+        SparQLService.sendQuery(om);
+    }
+
+    private static void runTriasExample(OntModel om) {
         // create the Ontology Service instance for the Ontology Model:
         TriasOntologyService triasOntService = new TriasOntologyService(om);
 
@@ -24,8 +30,6 @@ public class Main {
         try {
             Document resDoc = HelperFunctions.stringToDocument(res, true);
             triasOntService.mapTriasResToOntology(resDoc);
-            // Test Query:
-            SparQLService.sendQuery(om);
         }
         catch (ParserConfigurationException ex) {
             System.out.println("ParserConfigurationException: " + ex.getMessage());

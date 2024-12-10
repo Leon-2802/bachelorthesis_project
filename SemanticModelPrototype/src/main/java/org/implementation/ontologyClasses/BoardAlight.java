@@ -1,7 +1,5 @@
 package org.implementation.ontologyClasses;
 
-import java.time.LocalDateTime;
-
 public class BoardAlight {
     private StopPoint stopPoint;
     private String scheduledTime;
