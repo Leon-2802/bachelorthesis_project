@@ -168,27 +168,6 @@
     <rdfs:subClassOf rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
   </owl:Class>
   <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Trip">
-    <rdfs:label xml:lang="en">trip</rdfs:label>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:qualifiedCardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStartTime"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:qualifiedCardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDuration"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
@@ -199,17 +178,7 @@
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:qualifiedCardinality>
-        <owl:onProperty>
-          <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDestination"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:label xml:lang="de">Reise</rdfs:label>
+    <rdfs:label xml:lang="en">trip</rdfs:label>
     <rdfs:subClassOf>
       <owl:Restriction>
         <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg"/>
@@ -217,16 +186,6 @@
         >1</owl:minQualifiedCardinality>
         <owl:onProperty>
           <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasTripLeg"/>
-        </owl:onProperty>
-      </owl:Restriction>
-    </rdfs:subClassOf>
-    <rdfs:subClassOf>
-      <owl:Restriction>
-        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
-        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
-        >1</owl:qualifiedCardinality>
-        <owl:onProperty>
-          <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasEndTime"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -242,11 +201,52 @@
     </rdfs:subClassOf>
     <rdfs:subClassOf>
       <owl:Restriction>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasEndTime"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasStartTime"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label xml:lang="de">Reise</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
         <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
         <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
         >1</owl:qualifiedCardinality>
         <owl:onProperty>
           <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasInterchanges"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDuration"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onClass rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#StopPoint"/>
+        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:qualifiedCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#hasDestination"/>
         </owl:onProperty>
       </owl:Restriction>
     </rdfs:subClassOf>
@@ -433,38 +433,23 @@
     <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     <rdfs:domain rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#InterchangeLeg"/>
   </owl:DatatypeProperty>
-  <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Subway">
-    <rdfs:label xml:lang="en">subway</rdfs:label>
-    <rdfs:label xml:lang="de">U-Bahn</rdfs:label>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </j.0:TransitModes>
-  <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Bus">
-    <rdfs:label xml:lang="en">bus</rdfs:label>
-    <rdfs:label xml:lang="de">Bus</rdfs:label>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </j.0:TransitModes>
-  <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#LongDistanceTrain">
-    <rdfs:label xml:lang="en">long distance train</rdfs:label>
-    <rdfs:label xml:lang="de">Fernzug</rdfs:label>
-    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-  </j.0:TransitModes>
-  <j.0:Trip rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripID-0AD34835-21FE-47FE-BEFF-A5D6A782F65E">
+  <j.0:Trip rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripID-0CB89A03-182F-4215-A971-EA21147CA743">
     <j.0:hasTripLeg>
-      <j.0:InterchangeLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg4">
-        <j.0:hasInterchangeDuration>PT7M</j.0:hasInterchangeDuration>
+      <j.0:InterchangeLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg2">
+        <j.0:hasInterchangeDuration>PT9M</j.0:hasInterchangeDuration>
         <j.0:hasTripLegDestination>
-          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg4">
-            <j.0:hasStopID>de:08221:1144:2:RiN/O</j.0:hasStopID>
-            <j.0:hasName>Heidelberg, Betriebshof</j.0:hasName>
+          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg2">
+            <j.0:hasStopID>de:08222:2641:4:2</j.0:hasStopID>
+            <j.0:hasName>Mannheim, Arena/Maimarkt (DB)</j.0:hasName>
           </j.0:StopPoint>
         </j.0:hasTripLegDestination>
         <j.0:hasTripLegOrigin>
-          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg4">
-            <j.0:hasStopID>de:08221:1160:5:8</j.0:hasStopID>
-            <j.0:hasName>Heidelberg, Hauptbahnhof</j.0:hasName>
+          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg2">
+            <j.0:hasStopID>de:08222:3894:2:TrRiO</j.0:hasStopID>
+            <j.0:hasName>Neuhermsheim, SAP Arena S-Bf. (RNV)</j.0:hasName>
           </j.0:StopPoint>
         </j.0:hasTripLegOrigin>
-        <j.0:hasTripLegSequenceID>4</j.0:hasTripLegSequenceID>
+        <j.0:hasTripLegSequenceID>2</j.0:hasTripLegSequenceID>
       </j.0:InterchangeLeg>
     </j.0:hasTripLeg>
     <j.0:hasTripLeg>
@@ -474,7 +459,7 @@
         <j.0:hasTripLegSequenceID>3</j.0:hasTripLegSequenceID>
         <j.0:hasAlight>
           <j.0:BoardAlight rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#AlightForTripLeg3">
-            <j.0:hasScheduledTime>2024-12-10T19:46:00Z</j.0:hasScheduledTime>
+            <j.0:hasScheduledTime>2024-12-11T14:16:00Z</j.0:hasScheduledTime>
             <j.0:hasPlannedBay>8</j.0:hasPlannedBay>
             <j.0:hasStopSequence>5</j.0:hasStopSequence>
             <j.0:hasStop>
@@ -494,7 +479,7 @@
         </j.0:hasTransitMode>
         <j.0:hasBoard>
           <j.0:BoardAlight rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#BoardForTripLeg3">
-            <j.0:hasScheduledTime>2024-12-10T19:34:00Z</j.0:hasScheduledTime>
+            <j.0:hasScheduledTime>2024-12-11T14:03:00Z</j.0:hasScheduledTime>
             <j.0:hasPlannedBay>2</j.0:hasPlannedBay>
             <j.0:hasStopSequence>1</j.0:hasStopSequence>
             <j.0:hasStop>
@@ -511,69 +496,26 @@
         <j.0:hasTripLegOrigin rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg3"/>
       </j.0:TimedLeg>
     </j.0:hasTripLeg>
-    <j.0:hasDuration>PT40M</j.0:hasDuration>
+    <j.0:hasStartTime>2024-12-11T13:46:00Z</j.0:hasStartTime>
+    <j.0:hasEndTime>2024-12-11T14:29:00Z</j.0:hasEndTime>
     <j.0:hasTripLeg>
-      <j.0:InterchangeLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg2">
-        <j.0:hasInterchangeDuration>PT6M</j.0:hasInterchangeDuration>
+      <j.0:InterchangeLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg4">
+        <j.0:hasInterchangeDuration>PT7M</j.0:hasInterchangeDuration>
         <j.0:hasTripLegDestination>
-          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg2">
-            <j.0:hasStopID>de:08222:2641:4:2</j.0:hasStopID>
-            <j.0:hasName>Mannheim, Arena/Maimarkt (DB)</j.0:hasName>
+          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg4">
+            <j.0:hasStopID>de:08221:1144:2:RiN/O</j.0:hasStopID>
+            <j.0:hasName>Heidelberg, Betriebshof</j.0:hasName>
           </j.0:StopPoint>
         </j.0:hasTripLegDestination>
         <j.0:hasTripLegOrigin>
-          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg2">
-            <j.0:hasStopID>de:08222:3894:2:TrRiO</j.0:hasStopID>
-            <j.0:hasName>Neuhermsheim, SAP Arena S-Bf. (RNV)</j.0:hasName>
+          <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg4">
+            <j.0:hasStopID>de:08221:1160:5:8</j.0:hasStopID>
+            <j.0:hasName>Heidelberg, Hauptbahnhof</j.0:hasName>
           </j.0:StopPoint>
         </j.0:hasTripLegOrigin>
-        <j.0:hasTripLegSequenceID>2</j.0:hasTripLegSequenceID>
+        <j.0:hasTripLegSequenceID>4</j.0:hasTripLegSequenceID>
       </j.0:InterchangeLeg>
     </j.0:hasTripLeg>
-    <j.0:hasTripLeg>
-      <j.0:TimedLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg1">
-        <j.0:hasInformation>Linie RNV 6A: als Linie 6A</j.0:hasInformation>
-        <j.0:hasLine>RNV 6A, Direction: Neuhermsheim, SAP Arena S-Bf. (RNV)</j.0:hasLine>
-        <j.0:hasTransitMode>
-          <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Tram">
-            <rdfs:label xml:lang="en">tram</rdfs:label>
-            <rdfs:label xml:lang="de">Straßenbahn</rdfs:label>
-            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-          </j.0:TransitModes>
-        </j.0:hasTransitMode>
-        <j.0:hasAlight>
-          <j.0:BoardAlight rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#AlightForTripLeg1">
-            <j.0:hasScheduledTime>2024-12-10T19:31:00Z</j.0:hasScheduledTime>
-            <j.0:hasPlannedBay>Bstg. B</j.0:hasPlannedBay>
-            <j.0:hasStopSequence>8</j.0:hasStopSequence>
-            <j.0:hasStop>
-              <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg1">
-                <j.0:hasStopID>de:08222:3894:2:TrRiO</j.0:hasStopID>
-                <j.0:hasName>Neuhermsheim, SAP Arena S-Bf. (RNV)</j.0:hasName>
-              </j.0:StopPoint>
-            </j.0:hasStop>
-          </j.0:BoardAlight>
-        </j.0:hasAlight>
-        <j.0:hasBoard>
-          <j.0:BoardAlight rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#BoardForTripLeg1">
-            <j.0:hasScheduledTime>2024-12-10T19:22:00Z</j.0:hasScheduledTime>
-            <j.0:hasPlannedBay>Bstg. B</j.0:hasPlannedBay>
-            <j.0:hasStopSequence>1</j.0:hasStopSequence>
-            <j.0:hasStop>
-              <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg1">
-                <j.0:hasStopID>de:08222:2453:1:TrRiO</j.0:hasStopID>
-                <j.0:hasName>Mannheim, Planetarium</j.0:hasName>
-              </j.0:StopPoint>
-            </j.0:hasStop>
-          </j.0:BoardAlight>
-        </j.0:hasBoard>
-        <j.0:hasTripLegDestination rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg1"/>
-        <j.0:hasTripLegOrigin rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg1"/>
-        <j.0:hasTripLegSequenceID>1</j.0:hasTripLegSequenceID>
-      </j.0:TimedLeg>
-    </j.0:hasTripLeg>
-    <j.0:hasStartTime>2024-12-10T19:22:00Z</j.0:hasStartTime>
-    <j.0:hasEndTime>2024-12-10T20:02:00Z</j.0:hasEndTime>
     <j.0:hasTripLeg>
       <j.0:ContinuousLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg5">
         <j.0:hasWalkDuration>PT6M</j.0:hasWalkDuration>
@@ -593,7 +535,65 @@
       </j.0:ContinuousLeg>
     </j.0:hasTripLeg>
     <j.0:hasInterchanges>1</j.0:hasInterchanges>
+    <j.0:hasTripLeg>
+      <j.0:TimedLeg rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#TripLeg1">
+        <j.0:hasInformation>Linie RNV 6A: als Linie 6A</j.0:hasInformation>
+        <j.0:hasLine>RNV 6A, Direction: Neuhermsheim, SAP Arena S-Bf. (RNV)</j.0:hasLine>
+        <j.0:hasTransitMode>
+          <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Tram">
+            <rdfs:label xml:lang="en">tram</rdfs:label>
+            <rdfs:label xml:lang="de">Straßenbahn</rdfs:label>
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+          </j.0:TransitModes>
+        </j.0:hasTransitMode>
+        <j.0:hasAlight>
+          <j.0:BoardAlight rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#AlightForTripLeg1">
+            <j.0:hasScheduledTime>2024-12-11T13:51:00Z</j.0:hasScheduledTime>
+            <j.0:hasPlannedBay>Bstg. B</j.0:hasPlannedBay>
+            <j.0:hasStopSequence>8</j.0:hasStopSequence>
+            <j.0:hasStop>
+              <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg1">
+                <j.0:hasStopID>de:08222:3894:2:TrRiO</j.0:hasStopID>
+                <j.0:hasName>Neuhermsheim, SAP Arena S-Bf. (RNV)</j.0:hasName>
+              </j.0:StopPoint>
+            </j.0:hasStop>
+          </j.0:BoardAlight>
+        </j.0:hasAlight>
+        <j.0:hasBoard>
+          <j.0:BoardAlight rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#BoardForTripLeg1">
+            <j.0:hasScheduledTime>2024-12-11T13:42:00Z</j.0:hasScheduledTime>
+            <j.0:hasPlannedBay>Bstg. B</j.0:hasPlannedBay>
+            <j.0:hasStopSequence>1</j.0:hasStopSequence>
+            <j.0:hasStop>
+              <j.0:StopPoint rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg1">
+                <j.0:hasStopID>de:08222:2453:1:TrRiO</j.0:hasStopID>
+                <j.0:hasName>Mannheim, Planetarium</j.0:hasName>
+              </j.0:StopPoint>
+            </j.0:hasStop>
+          </j.0:BoardAlight>
+        </j.0:hasBoard>
+        <j.0:hasTripLegDestination rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#DestinationStopPointForTripLeg1"/>
+        <j.0:hasTripLegOrigin rdf:resource="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#OriginStopPointForTripLeg1"/>
+        <j.0:hasTripLegSequenceID>1</j.0:hasTripLegSequenceID>
+      </j.0:TimedLeg>
+    </j.0:hasTripLeg>
+    <j.0:hasDuration>PT43M</j.0:hasDuration>
   </j.0:Trip>
+  <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Subway">
+    <rdfs:label xml:lang="en">subway</rdfs:label>
+    <rdfs:label xml:lang="de">U-Bahn</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </j.0:TransitModes>
+  <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#Bus">
+    <rdfs:label xml:lang="en">bus</rdfs:label>
+    <rdfs:label xml:lang="de">Bus</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </j.0:TransitModes>
+  <j.0:TransitModes rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#LongDistanceTrain">
+    <rdfs:label xml:lang="en">long distance train</rdfs:label>
+    <rdfs:label xml:lang="de">Fernzug</rdfs:label>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  </j.0:TransitModes>
   <owl:AllDisjointClasses>
     <owl:members rdf:parseType="Collection">
       <owl:Class rdf:about="http://www.iiius.de/ontologies/public_transit_travel_information_ontology#ContinuousLeg"/>

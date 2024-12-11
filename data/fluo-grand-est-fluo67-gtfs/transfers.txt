@@ -1,4 +1,4 @@
-﻿from_stop_id,to_stop_id,transfer_type,min_transfer_time
+from_stop_id,to_stop_id,transfer_type,min_transfer_time
 5733R,5733A,0,
 818R,818A,0,
 5734A,818A,0,

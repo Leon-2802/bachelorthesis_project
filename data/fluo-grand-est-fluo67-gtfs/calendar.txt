@@ -1,4 +1,4 @@
-﻿service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
 7714:280-23-31,1,1,1,1,1,0,0,20240701,20250830
 7714:280-23-32,0,0,0,0,0,1,0,20240701,20250830
 7714:280-23-63,1,1,1,1,1,1,0,20240701,20250830

@@ -1,4 +1,4 @@
-﻿stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station,stop_timezone,wheelchair_boarding
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station,stop_timezone,wheelchair_boarding
 8491,8491,"Gare",,48.7330879,7.7004125,,,1,,,
 5674A,5674A,"Gare",,48.7330999,7.7004001,,,0,8491,,
 5674R,5674R,"Gare",,48.7330999,7.7004001,,,0,8491,,

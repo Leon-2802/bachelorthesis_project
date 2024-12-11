@@ -1,4 +1,4 @@
-﻿service_id,date,exception_type
+service_id,date,exception_type
 7714:280-23-31,20241101,2
 7714:280-23-31,20241225,2
 7714:280-23-31,20241226,2
