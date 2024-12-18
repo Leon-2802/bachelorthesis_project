@@ -215,13 +215,6 @@ public class TriasOntologyService {
             // add Origin and Destination properties to Trip:
             //....
         }
-
-        //save to file for testing:
-        try {
-            saveOntModelToOwlFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private TimedLeg handleTimedLeg(Element timedLeg) {
@@ -323,21 +316,14 @@ public class TriasOntologyService {
     }
 
     private String matchTransitMode(Element triasMode) {
-        switch (triasMode.getTextContent()) {
-            case "bus", "coach":
-                return "Bus";
-            case "tram":
-                return "Tram";
-            case "rail", "urbanRail":
-                return "RegionalTrain";
-            case "intercity":
-                return "LongDistanceTrain";
-            case "metro":
-                return "Subway";
-
-            default:
-                return "UnknownTransitMode";
-        }
+        return switch (triasMode.getTextContent()) {
+            case "bus", "coach" -> "Bus";
+            case "tram" -> "Tram";
+            case "rail", "urbanRail" -> "RegionalTrain";
+            case "intercity" -> "LongDistanceTrain";
+            case "metro" -> "Subway";
+            default -> "UnknownTransitMode";
+        };
     }
 
     private static Node getElementChild(Element parent, String tagName, int index) {

@@ -99,7 +99,6 @@ public class GTFSLoader {
         Element rootElement = doc.createElement("GTFSConnectionData");
         doc.appendChild(rootElement);
 
-        boolean connectionFound = false;
 
         // Find trips that include the start stop
         List<String> startTrips = new ArrayList<>();
@@ -121,9 +120,8 @@ public class GTFSLoader {
         for (String tripId : startTrips) {
             if (endTrips.contains(tripId)) {
                 Element directConnection = doc.createElement("DirectConnection");
-                directConnection.appendChild(createTripElement(doc, this.tripsData.get(tripId), startStopId, endStopId, this.routesData, this.stopTimesData));
+                directConnection.appendChild(createTripElement(doc, this.tripsData.get(tripId), startStopId, endStopId));
                 rootElement.appendChild(directConnection);
-                connectionFound = true;
                 return doc;
             }
         }
@@ -140,9 +138,9 @@ public class GTFSLoader {
                                 for (Map<String, String> endStopTime : this.stopTimesData) {
                                     if (endStopTime.get("trip_id").equals(endTrip) && endStopTime.get("stop_id").equals(toStop)) {
                                         Element transferConnection = doc.createElement("TransferConnection");
-                                        transferConnection.appendChild(createTripElement(doc, this.tripsData.get(startTrip), startStopId, transfer.get("from_stop_id"), this.routesData, this.stopTimesData));
+                                        transferConnection.appendChild(createTripElement(doc, this.tripsData.get(startTrip), startStopId, transfer.get("from_stop_id")));
                                         transferConnection.appendChild(createTransferElement(doc, transfer));
-                                        transferConnection.appendChild(createTripElement(doc, this.tripsData.get(endTrip), transfer.get("to_stop_id"), endStopId, this.routesData, this.stopTimesData));
+                                        transferConnection.appendChild(createTripElement(doc, this.tripsData.get(endTrip), transfer.get("to_stop_id"), endStopId));
                                         rootElement.appendChild(transferConnection);
                                         return doc;
                                     }
@@ -157,7 +155,7 @@ public class GTFSLoader {
         throw new Exception("No connection found between stops: " + startStopId + " and " + endStopId);
     }
 
-    private static Element createTripElement(Document doc, Map<String, String> tripData, String startStop, String endStop, Map<String, Map<String, String>> routesData, List<Map<String, String>> stopTimesData) {
+    private Element createTripElement(Document doc, Map<String, String> tripData, String startStop, String endStop) {
         Element tripElement = doc.createElement("Trip");
         tripElement.setAttribute("id", tripData.get("trip_id"));
 
@@ -170,7 +168,7 @@ public class GTFSLoader {
         tripElement.appendChild(detailElement);
 
         Element routeElement = doc.createElement("Route");
-        Map<String, String> routeData = routesData.get(tripData.get("route_id"));
+        Map<String, String> routeData = this.routesData.get(tripData.get("route_id"));
         for (Map.Entry<String, String> entry : routeData.entrySet()) {
             Element dataElement = doc.createElement(entry.getKey());
             dataElement.appendChild(doc.createTextNode(entry.getValue()));
@@ -178,9 +176,14 @@ public class GTFSLoader {
         }
         tripElement.appendChild(routeElement);
 
+        Element startStopElement = createStopElement(doc, startStop, "OriginStop");
+        Element endStopElement = createStopElement(doc, endStop, "DestinationStop");
+        tripElement.appendChild(startStopElement);
+        tripElement.appendChild(endStopElement);
+
         Element stopTimesElement = doc.createElement("StopTimes");
         boolean inRange = false;
-        for (Map<String, String> stopTime : stopTimesData) {
+        for (Map<String, String> stopTime : this.stopTimesData) {
             if (stopTime.get("trip_id").equals(tripData.get("trip_id"))) {
                 if (stopTime.get("stop_id").equals(startStop)) inRange = true;
                 if (inRange) {
@@ -200,149 +203,29 @@ public class GTFSLoader {
         return tripElement;
     }
 
-    private static Element createTransferElement(Document doc, Map<String, String> transferData) {
+    private Element createTransferElement(Document doc, Map<String, String> transferData) {
         Element transferElement = doc.createElement("Transfer");
         for (Map.Entry<String, String> entry : transferData.entrySet()) {
             Element dataElement = doc.createElement(entry.getKey());
             dataElement.appendChild(doc.createTextNode(entry.getValue()));
             transferElement.appendChild(dataElement);
         }
+        // get data of origin and destination stop
+        Element originStopElement = createStopElement(doc, transferData.get("from_stop_id"), "OriginStop");
+        Element destinationStopElement = createStopElement(doc, transferData.get("to_stop_id"), "DestinationStop");
+        transferElement.appendChild(originStopElement);
+        transferElement.appendChild(destinationStopElement);
         return transferElement;
     }
 
-    public void findConnection(String startStopId, String endStopId) throws NotFoundException {
-
-        // Find trips that include the start stop
-        List<String> startTrips = new ArrayList<>();
-        for (Map<String, String> stopTime :this.stopTimesData) {
-            if (stopTime.get("stop_id").equals(startStopId)) {
-                startTrips.add(stopTime.get("trip_id"));
-            }
+    private Element createStopElement(Document doc, String stopId, String tagName) {
+        Element stopElement = doc.createElement(tagName);
+        Map<String, String> stopData = this.stopsData.get(stopId);
+        for (Map.Entry<String, String> entry : stopData.entrySet()) {
+            Element dataElement = doc.createElement(entry.getKey());
+            dataElement.appendChild(doc.createTextNode(entry.getValue()));
+            stopElement.appendChild(dataElement);
         }
-
-        // Find trips that include the end stop
-        List<String> endTrips = new ArrayList<>();
-        for (Map<String, String> stopTime : this.stopTimesData) {
-            if (stopTime.get("stop_id").equals(endStopId)) {
-                endTrips.add(stopTime.get("trip_id"));
-            }
-        }
-
-        // Check for direct connection
-        for (String tripId : startTrips) {
-            if (endTrips.contains(tripId)) {
-                System.out.println("Direct connection found on trip: " + tripId);
-                return;
-            }
-        }
-
-        // Check for transfers
-        for (String startTrip : startTrips) {
-            for (Map<String, String> stopTime : this.stopTimesData) {
-                if (stopTime.get("trip_id").equals(startTrip)) {
-                    String transferStop = stopTime.get("stop_id");
-                    for (Map<String, String> transfer : this.transferData) {
-                        if (transfer.get("from_stop_id").equals(transferStop)) {
-                            String toStop = transfer.get("to_stop_id");
-                            for (String endTrip : endTrips) {
-                                for (Map<String, String> endStopTime : this.stopTimesData) {
-                                    if (endStopTime.get("trip_id").equals(endTrip) && endStopTime.get("stop_id").equals(toStop)) {
-                                        // load trip 01
-                                        // load transfer
-                                        // load trip 02
-                                        System.out.println("Connection found with transfer at stop: " + transferStop);
-                                        System.out.println("Trips on connection: " + startTrip +", " + endTrip);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // If no connection is found
-        throw new NotFoundException("No connection found between stops: " + startStopId + " and " + endStopId);
-    }
-
-    public Document loadTripToXML(String tripId)
-            throws ParserConfigurationException {
-
-        // Create a new XML document
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.newDocument();
-
-        // Root element
-        Element rootElement = doc.createElement("Trip");
-        rootElement.setAttribute("id", tripId);
-        doc.appendChild(rootElement);
-
-        // Add trip details
-        Map<String, String> tripDetails = this.tripsData.get(tripId);
-        String routeId = "";
-        if (tripDetails != null) {
-            Element tripElement = doc.createElement("Details");
-            for (Map.Entry<String, String> entry : tripDetails.entrySet()) {
-                Element detail = doc.createElement(entry.getKey());
-                if (entry.getKey().equals("route_id")) {
-                    routeId = entry.getValue();
-                }
-                detail.setTextContent(entry.getValue());
-                tripElement.appendChild(detail);
-            }
-            rootElement.appendChild(tripElement);
-        }
-
-        // Add route details
-        Map<String, String> routeDetails = this.routesData.get(routeId);
-        if (routeDetails != null) {
-            Element routeElement = doc.createElement("TripRoute");
-            for (Map.Entry<String, String> entry : routeDetails.entrySet()) {
-                Element detail = doc.createElement(entry.getKey());
-                detail.setTextContent(entry.getValue());
-                routeElement.appendChild(detail);
-            }
-            rootElement.appendChild(routeElement);
-        }
-
-
-        // Add stop times
-        Element stopTimesElement = doc.createElement("StopTimes");
-        for (Map<String, String> stopTime : this.stopTimesData) {
-            if (tripId.equals(stopTime.get("trip_id"))) {
-                Element stopTimeElement = doc.createElement("StopTime");
-                for (Map.Entry<String, String> entry : stopTime.entrySet()) {
-                    Element detail = doc.createElement(entry.getKey());
-                    detail.setTextContent(entry.getValue());
-                    stopTimeElement.appendChild(detail);
-                }
-                stopTimesElement.appendChild(stopTimeElement);
-            }
-        }
-        rootElement.appendChild(stopTimesElement);
-
-        // Add stops
-        Element stopsElement = doc.createElement("Stops");
-        for (Map<String, String> stopTime : this.stopTimesData) {
-            if (tripId.equals(stopTime.get("trip_id"))) {
-                String stopId = stopTime.get("stop_id");
-                Map<String, String> stopDetails = this.stopsData.get(stopId);
-                if (stopDetails != null) {
-                    Element stopElement = doc.createElement("Stop");
-                    stopElement.setAttribute("id", stopId);
-                    for (Map.Entry<String, String> entry : stopDetails.entrySet()) {
-                        Element detail = doc.createElement(entry.getKey());
-                        detail.setTextContent(entry.getValue());
-                        stopElement.appendChild(detail);
-                    }
-                    stopsElement.appendChild(stopElement);
-                }
-            }
-        }
-        rootElement.appendChild(stopsElement);
-
-        return doc;
+        return stopElement;
     }
 }
