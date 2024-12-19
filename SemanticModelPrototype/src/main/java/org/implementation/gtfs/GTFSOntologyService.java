@@ -44,16 +44,14 @@ public class GTFSOntologyService {
         }
     }
 
-    public void mapGtfsToOntology(Document doc) {
+    public void mapGtfsToOntology(Document doc) throws IllegalArgumentException {
         this.gtfsDocument = doc;
 
         Element connectionElement = (Element) doc.getElementsByTagName("TransferConnection").item(0);
-
-        // Calculate...
-
-        //... StartTime
-        //... EndTime
-        //.. Duration
+        if (connectionElement == null) {
+            connectionElement = (Element) doc.getElementsByTagName("DirectConnection").item(0);
+            if (connectionElement == null) throw new IllegalArgumentException("No connection found between given origin and destination");
+        }
         //... Interchanges
         NodeList transfers = connectionElement.getElementsByTagName("Transfer");
         String interchanges = String.valueOf(transfers.getLength());
@@ -171,12 +169,8 @@ public class GTFSOntologyService {
             // note that there are not continuous legs in gtfs data, so those are not handled here
         }
 
-        //save to file for testing:
-        try {
-            saveOntModelToOwlFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // add startTime and endTime here
+
     }
 
     private TimedLeg addTimedLeg(Element gtfsTrip, String tripLegSequenceId) {

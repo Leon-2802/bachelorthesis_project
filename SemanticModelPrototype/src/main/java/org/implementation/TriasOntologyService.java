@@ -67,10 +67,11 @@ public class TriasOntologyService {
 
     private static final String ontRoot = Constants.ontRoot;
 
-    public void mapTriasResToOntology(Document doc) {
+    public void mapTriasResToOntology(Document doc) throws IllegalArgumentException {
         this.triasDocument = doc;
 
         Node tripNode = getNodeByPath("//trias:Trip", this.triasDocument);
+        if (tripNode == null) throw new IllegalArgumentException("Could not find a connection for the given origin and destination");
         if (tripNode.getNodeType() == Node.ELEMENT_NODE) {
             Element tripElement = (Element) tripNode;
 
