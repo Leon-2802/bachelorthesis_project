@@ -3,14 +3,11 @@ package org.implementation.gtfs;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.jena.shared.NotFoundException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -18,11 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-enum RouteType {
-    BUS,
-    DEMAND_AND_RESPONSE_BUS
-}
 
 public class GTFSLoader {
     private final Map<String, Map<String, String>> tripsData;

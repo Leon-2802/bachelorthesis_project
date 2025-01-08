@@ -1,9 +1,10 @@
-package org.implementation;
+package org.implementation.trias;
 
 import org.apache.jena.ontapi.model.OntModel;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
+import org.implementation.Constants;
 import org.implementation.ontologyClasses.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -120,11 +121,10 @@ public class TriasOntologyService {
                 Property hasWalkDuration = model.getProperty(ontRoot + "hasWalkDuration");
                 Property hasInterchangeDuration = model.getProperty(ontRoot + "hasInterchangeDuration");
                 Property hasTripLeg = model.getProperty(ontRoot + "hasTripLeg");
-                Property bikesAllowed = model.getProperty(ontRoot + "bikesAllowed");
                 Property hasInformation = model.getProperty(ontRoot + "hasInformation");
                 Property hasLine = model.getProperty(ontRoot + "hasLine");
-                Property wheelchairAccessible = model.getProperty(ontRoot + "wheelchairAccessible");
                 Property hasTransitMode = model.getProperty(ontRoot + "hasTransitMode");
+                Property realtimeDataProp = model.getProperty(ontRoot + "realtimeData");
                 Property hasStop = model.getProperty(ontRoot + "hasStop");
                 Property hasStopSequence = model.getProperty(ontRoot + "hasStopSequence");
                 Property hasPlannedBay = model.getProperty(ontRoot + "hasPlannedBay");
@@ -168,6 +168,7 @@ public class TriasOntologyService {
                         Resource transitMode = model.getResource(ontRoot + timedLeg.getTransitMode());
                         tripLeg.addProperty(hasTransitMode, transitMode);
                         tripLeg.addLiteral(hasLine, timedLeg.getLine());
+                        tripLeg.addLiteral(realtimeDataProp, timedLeg.isRealtimeData() ? "true" : "false");
                         for (int j = 0; j < timedLeg.getInformation().size(); j++) {
                             tripLeg.addLiteral(hasInformation, timedLeg.getInformation().get(j));
                         }
@@ -250,7 +251,7 @@ public class TriasOntologyService {
             information.add(attributeValue);
         }
 
-        return new TimedLeg(board.getStopPoint(), alight.getStopPoint(), board, alight, lineNameText, transitMode, information);
+        return new TimedLeg(board.getStopPoint(), alight.getStopPoint(), board, alight, lineNameText, transitMode, true, information);
     }
     private ContinuousLeg handleContinuousLeg(Element continuousLeg) {
         Element legStart = (Element) continuousLeg.getElementsByTagName("trias:LegStart").item(0);

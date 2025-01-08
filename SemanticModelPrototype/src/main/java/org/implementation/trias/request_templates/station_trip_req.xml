@@ -22,10 +22,6 @@
                     <NumberOfResults>5</NumberOfResults>
                     <InterchangeLimit>1</InterchangeLimit>
                     <AlgorithmType>fastest</AlgorithmType>
-                    <!--					<AlgorithmType>fastest</AlgorithmType>
-                                        <AlgorithmType>leastCost</AlgorithmType>
-                                        <AlgorithmType>leastWalking</AlgorithmType>
-                                        <AlgorithmType>minChanges</AlgorithmType>-->
                     <ItModesToCover>walk</ItModesToCover>
                     <IncludeTrackSections>false</IncludeTrackSections>
                     <IncludeIntermediateStops>false</IncludeIntermediateStops>

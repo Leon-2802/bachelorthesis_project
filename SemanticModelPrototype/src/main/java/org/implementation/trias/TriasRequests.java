@@ -56,7 +56,8 @@ public class TriasRequests {
         }
     }
 
-    public String stationToStationTripRequest (String originStationRef, String destinationStationRef, String depTime, short numOfResults, boolean realTimeData, RequestTargets target) {
+    public String stationToStationTripRequest (String originStationRef, String destinationStationRef,
+                                               String depTime, short numOfResults, boolean realTimeData, RequestTargets target) {
         try {
             // Load the XML template
             Document document = this.docBuilder.parse("SemanticModelPrototype/src/main/java/org/implementation/trias/request_templates/station_trip_req.xml");

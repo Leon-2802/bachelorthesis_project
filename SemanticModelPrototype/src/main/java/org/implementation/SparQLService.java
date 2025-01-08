@@ -14,7 +14,7 @@ public final class SparQLService {
                     "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> " +
                     "PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#> " +
                     "\n" +
-                    "SELECT ?trip ?legType ?tripLegSequenceID ?walkDuration ?interchangeDuration ?originStopID ?originStopName ?destinationStopID ?destinationStopName ?line ?transitMode ?scheduledTimeBoard ?plannedBayBoard ?stopSequenceBoard ?scheduledTimeAlight ?plannedBayAlight ?stopSequenceAlight (GROUP_CONCAT(?info; SEPARATOR=\", \") AS ?infos)\n" +
+                    "SELECT ?trip ?legType ?tripLegSequenceID ?walkDuration ?interchangeDuration ?originStopID ?originStopName ?destinationStopID ?destinationStopName ?line ?transitMode ?realtimeData ?scheduledTimeBoard ?plannedBayBoard ?stopSequenceBoard ?scheduledTimeAlight ?plannedBayAlight ?stopSequenceAlight (GROUP_CONCAT(?info; SEPARATOR=\", \") AS ?infos)\n" +
                     "WHERE {\n" +
                     "  ?trip rdf:type j0:Trip ;\n" +
                     "        j0:hasTripLeg ?leg .\n" +
@@ -40,6 +40,7 @@ public final class SparQLService {
                     "    ?mode rdfs:label ?transitMode .\n" +
                     "    FILTER (lang(?transitMode) = \"en\") \n" +
                     "  }\n" +
+                    "  OPTIONAL { ?leg j0:realtimeData ?realtimeData . }\n" +
                     "  OPTIONAL { \n" +
                     "    ?leg j0:hasBoard ?board .\n" +
                     "    ?board j0:hasScheduledTime ?scheduledTimeBoard ;\n" +
@@ -54,7 +55,7 @@ public final class SparQLService {
                     "  }\n" +
                     "  OPTIONAL { ?leg j0:hasInformation ?info . }\n" +
                     "}\n" +
-                    "GROUP BY ?trip ?legType ?tripLegSequenceID ?walkDuration ?interchangeDuration ?originStopID ?originStopName ?destinationStopID ?destinationStopName ?line ?transitMode ?scheduledTimeBoard ?plannedBayBoard ?stopSequenceBoard ?scheduledTimeAlight ?plannedBayAlight ?stopSequenceAlight\n" +
+                    "GROUP BY ?trip ?legType ?tripLegSequenceID ?walkDuration ?interchangeDuration ?originStopID ?originStopName ?destinationStopID ?destinationStopName ?line ?transitMode ?realtimeData ?scheduledTimeBoard ?plannedBayBoard ?stopSequenceBoard ?scheduledTimeAlight ?plannedBayAlight ?stopSequenceAlight\n" +
                     "ORDER BY ?tripLegSequenceID\n";
 
         // Create and execute the query
@@ -124,6 +125,11 @@ public final class SparQLService {
                         System.out.println("  Transit Mode: " + soln.get("transitMode"));
                     } else {
                         System.out.println("  Transit Mode: N/A");
+                    }
+                    if (soln.contains("realtimeData")) {
+                        System.out.println("  Realtime Data: " + soln.get("realtimeData"));
+                    } else {
+                        System.out.println("  Realtime Data: N/A");
                     }
                     System.out.println("  Board:");
                     if (soln.contains("scheduledTimeBoard")) {

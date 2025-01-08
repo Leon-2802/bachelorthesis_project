@@ -4,6 +4,7 @@ import org.apache.jena.ontapi.model.OntModel;
 import org.apache.jena.shared.NotFoundException;
 import org.implementation.gtfs.GTFSLoader;
 import org.implementation.gtfs.GTFSOntologyService;
+import org.implementation.trias.TriasOntologyService;
 import org.implementation.trias.TriasRequests;
 import org.implementation.trias.RequestTargets;
 import org.w3c.dom.Document;
@@ -21,29 +22,59 @@ public class Main {
         System.out.println("Type 'TRIAS' to run the TRIAS-example, or 'GTFS' for the GTFS-example");
         String runChoice = scanner.nextLine();
         if (runChoice.equalsIgnoreCase("TRIAS")) {
-            // Example TRIAS-IDs:
-            // de:08222:2453, de:08221:1199
-            System.out.println("Enter the TRIAS-ID of the origin station");
-            String originStationId = scanner.nextLine();
-            System.out.println("Enter the TRIAS-ID of the destination station");
-            String destinationStationId = scanner.nextLine();
-            System.out.println("Do you want to print the XML-Response from the VRN TRIAS API? (Y/N)");
-            String printXMLChoice = scanner.nextLine();
-            boolean printXML = printXMLChoice.equalsIgnoreCase("Y");
-            runTriasExample(om, originStationId, destinationStationId, printXML);
+            System.out.println("Use default origin and destination? (Y/N)");
+            String defaultTripChoice = scanner.nextLine();
+            if (defaultTripChoice.equalsIgnoreCase("Y")) {
+                String originStationId = "de:08222:2453";
+                String destinationStationId = "de:08221:1199";
+                System.out.println("Do you want to print the XML-Response from the VRN TRIAS API? (Y/N)");
+                String printXMLChoice = scanner.nextLine();
+                boolean printXML = printXMLChoice.equalsIgnoreCase("Y");
+                runTriasExample(om, originStationId, destinationStationId, printXML);
+            } else if (defaultTripChoice.equalsIgnoreCase("N")) {
+                // Example TRIAS-IDs:
+                // de:08317:14506, fr:24067:58
+                // de:08212:205, de:08212:310
+                System.out.println("Enter the TRIAS-ID of the origin station");
+                String originStationId = scanner.nextLine();
+                System.out.println("Enter the TRIAS-ID of the destination station");
+                String destinationStationId = scanner.nextLine();
+                System.out.println("Do you want to print the XML-Response from the VRN TRIAS API? (Y/N)");
+                String printXMLChoice = scanner.nextLine();
+                boolean printXML = printXMLChoice.equalsIgnoreCase("Y");
+                runTriasExample(om, originStationId, destinationStationId, printXML);
+            }
+            else {
+                System.out.println("Invalid value. Please try again.");
+                return;
+            }
         }
         else if (runChoice.equalsIgnoreCase("GTFS")) {
-            // Example GTFS-IDs:
-            // 566A -157A
-            // 105R - 114R
-            System.out.println("Enter the GTFS-ID of the origin station");
-            String originStationId = scanner.nextLine();
-            System.out.println("Enter the GTFS-ID of the destination station");
-            String destinationStationId = scanner.nextLine();
-            System.out.println("Do you want to print the XML-File of the parsed GTFS-Data? (Y/N)");
-            String printXMLChoice = scanner.nextLine();
-            boolean printXML = printXMLChoice.equalsIgnoreCase("Y");
-            runGTFSExample(om,originStationId, destinationStationId, printXML);
+            System.out.println("Use default origin and destination? (Y/N)");
+            String defaultTripChoice = scanner.nextLine();
+            if (defaultTripChoice.equalsIgnoreCase("Y")) {
+                String originStationId = "566A";
+                String destinationStationId = "157A";
+                System.out.println("Do you want to print the XML-File of the parsed GTFS-Data? (Y/N)");
+                String printXMLChoice = scanner.nextLine();
+                boolean printXML = printXMLChoice.equalsIgnoreCase("Y");
+                runGTFSExample(om, originStationId, destinationStationId, printXML);
+            } else if (defaultTripChoice.equalsIgnoreCase("N")){
+                // Example GTFS-IDs:
+                // 105R - 114R
+                System.out.println("Enter the GTFS-ID of the origin station");
+                String originStationId = scanner.nextLine();
+                System.out.println("Enter the GTFS-ID of the destination station");
+                String destinationStationId = scanner.nextLine();
+                System.out.println("Do you want to print the XML-File of the parsed GTFS-Data? (Y/N)");
+                String printXMLChoice = scanner.nextLine();
+                boolean printXML = printXMLChoice.equalsIgnoreCase("Y");
+                runGTFSExample(om,originStationId, destinationStationId, printXML);
+            }
+            else {
+                System.out.println("Invalid value. Please try again.");
+                return;
+            }
         }
         else {
             System.out.println("Invalid choice. Please try again.");
@@ -58,10 +89,10 @@ public class Main {
             GTFSLoader gtfsLoader = new GTFSLoader();
             GTFSOntologyService gtfsOntService = new GTFSOntologyService(om);
 
-            Document test = gtfsLoader.extractConnectionDataToXML(originId, destinationId);
-            gtfsOntService.mapGtfsToOntology(test);
+            Document connectionData = gtfsLoader.extractConnectionDataToXML(originId, destinationId);
+            gtfsOntService.mapGtfsToOntology(connectionData);
             if (printXML) {
-                String testString = HelperFunctions.documentToString(test);
+                String testString = HelperFunctions.documentToString(connectionData);
                 System.out.println("Trip XML Document:\n" + testString);
             }
             System.out.println("SPARQL results for GTFS trip from stop " + originId + " to " + destinationId + " mapped to ontology in area of agency Fluo Grand Est 67:");

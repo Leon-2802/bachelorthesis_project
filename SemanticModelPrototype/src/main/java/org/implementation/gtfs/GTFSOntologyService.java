@@ -71,18 +71,16 @@ public class GTFSOntologyService {
         Property hasWalkDuration = model.getProperty(ontRoot + "hasWalkDuration");
         Property hasInterchangeDuration = model.getProperty(ontRoot + "hasInterchangeDuration");
         Property hasTripLeg = model.getProperty(ontRoot + "hasTripLeg");
-        Property bikesAllowed = model.getProperty(ontRoot + "bikesAllowed");
         Property hasInformation = model.getProperty(ontRoot + "hasInformation");
         Property hasLine = model.getProperty(ontRoot + "hasLine");
-        Property wheelchairAccessible = model.getProperty(ontRoot + "wheelchairAccessible");
         Property hasTransitMode = model.getProperty(ontRoot + "hasTransitMode");
+        Property realtimeData = model.getProperty(ontRoot + "realtimeData");
         Property hasStop = model.getProperty(ontRoot + "hasStop");
         Property hasStopSequence = model.getProperty(ontRoot + "hasStopSequence");
         Property hasPlannedBay = model.getProperty(ontRoot + "hasPlannedBay");
         Property hasScheduledTime = model.getProperty(ontRoot + "hasScheduledTime");
         Property hasBoard = model.getProperty(ontRoot + "hasBoard");
         Property hasAlight = model.getProperty(ontRoot + "hasAlight");
-        // ... add other literals
         trip.addLiteral(hasInterchanges, interchanges);
 
         NodeList tripList = doc.getElementsByTagName("Trip");
@@ -131,6 +129,7 @@ public class GTFSOntologyService {
                 Resource transitMode = model.getResource(ontRoot + timedLeg.getTransitMode());
                 timedLegResource.addProperty(hasTransitMode, transitMode);
                 timedLegResource.addLiteral(hasLine, timedLeg.getLine());
+                timedLegResource.addLiteral(realtimeData, timedLeg.isRealtimeData() ? "true" : "false");
                 for (int j = 0; j < timedLeg.getInformation().size(); j++) {
                     timedLegResource.addLiteral(hasInformation, timedLeg.getInformation().get(j));
                 }
@@ -168,9 +167,6 @@ public class GTFSOntologyService {
 
             // note that there are not continuous legs in gtfs data, so those are not handled here
         }
-
-        // add startTime and endTime here
-
     }
 
     private TimedLeg addTimedLeg(Element gtfsTrip, String tripLegSequenceId) {
@@ -235,7 +231,8 @@ public class GTFSOntologyService {
             board.setStopSequence("N/A");
         }
 
-        return new TimedLeg(board.getStopPoint(), alight.getStopPoint(), board, alight, line, transitMode, information);
+        return new TimedLeg(board.getStopPoint(), alight.getStopPoint(),
+                board, alight, line, transitMode, false, information);
     }
     private InterchangeLeg addInterchangeLeg(Element gtfsTransfer) {
         Element originStop = (Element) gtfsTransfer.getElementsByTagName("OriginStop").item(0);

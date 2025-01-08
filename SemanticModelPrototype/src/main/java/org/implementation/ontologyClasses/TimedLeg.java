@@ -7,14 +7,16 @@ public class TimedLeg  extends TripLeg{
     private BoardAlight alight;
     private String line;
     private String transitMode;
+    private boolean realtimeData;
     private List<String> information;
 
-    public TimedLeg(StopPoint origin, StopPoint destination, BoardAlight board, BoardAlight alight, String line, String transitMode, List<String> information) {
+    public TimedLeg(StopPoint origin, StopPoint destination, BoardAlight board, BoardAlight alight, String line, String transitMode, boolean realtimeData, List<String> information) {
         super(origin, destination);
         this.board = board;
         this.alight = alight;
         this.line = line;
         this.transitMode = transitMode;
+        this.realtimeData = realtimeData;
         this.information = information;
     }
 
@@ -48,6 +50,14 @@ public class TimedLeg  extends TripLeg{
 
     public void setTransitMode(String transitMode) {
         this.transitMode = transitMode;
+    }
+
+    public boolean isRealtimeData() {
+        return realtimeData;
+    }
+
+    public void setRealtimeData(boolean realtimeData) {
+        this.realtimeData = realtimeData;
     }
 
     public List<String> getInformation() {
