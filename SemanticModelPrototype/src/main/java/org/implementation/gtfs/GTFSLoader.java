@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GTFSLoader {
+    // The following class, including its methods, have been generated with help of the AI-tool ChatGPT (https://chatgpt.com/)
     private final Map<String, Map<String, String>> tripsData;
     private final Map<String, Map<String, String>> routesData;
     private final Map<String, Map<String, String>> stopsData;
