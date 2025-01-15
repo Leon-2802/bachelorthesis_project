@@ -8,10 +8,17 @@ In this particular case, the user shall be able to recieve all available data co
 Framework: Apache Jena 5.10
 JDK: 17 Oracle OpenJDK version 17
 
-Download and Installation: 
+#### Run Executable
+If you would like to run the .jar executable, open the repository in an IDE, preferably IntelliJ.
+Then go to out/artifacts/bachelorthesis_project_jar, right-click the file bachelorthesis_project.jar and choose "Run" from the pop-up menu.
+
+#### Run Source Code: 
 1. Download following binary distribution of the framework: https://dlcdn.apache.org/jena/binaries/apache-jena-5.1.0.tar.gz
 2. Extract the compressed folder
-3. Import all the .jar files found inside the lib folder of the extracted source folder into the repo, by opening it in IntelliJ (or other preffered IDE) and adding it under the libraries-tab in the project settings
+3. Import all the .jar files found inside the lib folder of the extracted source folder into the repo, by opening it in IntelliJ (or other preffered IDE) and adding it under the libraries-tab in the project settings (see screenshot below)
+
 ![Screenshot 2025-01-15 175928](https://github.com/user-attachments/assets/b7483bbb-e85b-4a51-b752-c33884ebe69d)
+
+
 
 [1] https://www.vrn.de/opendata/API; https://transport.data.gouv.fr/datasets/fr-200052264-t0049-0000-1 
