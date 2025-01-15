@@ -4,7 +4,7 @@ This project is part of my bachelor thesis "Conception and prototypical realisat
 
 The project aims to visualize the use of semantic models in processing distributed data sources in public transport systems. 
 In this particular case, the user shall be able to recieve all available data concerning a given connection from one of the two data sources [1], without having to deal with sending queries to the API or GTFS-dataset of the respective transport association.
-Independent from the underlying data source, the query for a connection-information-request follows always the same format. This also counts for the response. 
+Independent from the underlying data source, the query for a connection-information-request always follows the same format. This also counts for the response. 
 This is achieved by the usage of semantic annotations, which insert the heterogenous data into the semantic model.
 
 Framework: Apache Jena 5.10
