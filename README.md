@@ -8,7 +8,7 @@ Independent from the underlying data source, the query for a connection-informat
 This is achieved by the usage of semantic annotations, which insert the heterogenous data into the structure of the semantic model.
 
 The implementation code is found under: SemanticModelPrototype/src/main/java/org/implementation.
-For viewing the RDF-file of the semantic model, open the folder "protege"
+For viewing the RDF-file of the semantic model, open the folder "protege".
 
 
 Framework: Apache Jena 5.10
