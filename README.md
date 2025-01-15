@@ -7,7 +7,7 @@ In this particular case, the user shall be able to recieve all available data co
 Independent from the underlying data source, the query for a connection-information-request always follows the same format. This also counts for the data-structure of the response. 
 This is achieved by the usage of semantic annotations, which insert the heterogenous data into the structure of the semantic model.
 
-The implementation code is found under: SemanticModelPrototype/src/main/java/org/implementation
+The implementation code is found under: SemanticModelPrototype/src/main/java/org/implementation.
 For viewing the RDF-file of the semantic model, open the folder "protege"
 
 
