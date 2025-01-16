@@ -22,6 +22,7 @@ Then go to out/artifacts/bachelorthesis_project_jar, right-click the file bachel
 1. Download following binary distribution of the framework: https://dlcdn.apache.org/jena/binaries/apache-jena-5.1.0.tar.gz
 2. Extract the compressed folder
 3. Import all the .jar files found inside the lib folder of the extracted source folder into the repo, by opening it in IntelliJ (or other preffered IDE) and adding it under the libraries-tab in the project settings (see screenshot below)
+4. If you don't find a file called "vrnApiKey.txt" inside SemanticModelPrototype/src/main/java/org/implementation, you have to request an API key at https://www.vrn.de/opendata/user/register and create a file with the same name (vrnApiKey.txt), that only contains the recieved key.
 
 ![Screenshot 2025-01-15 175928](https://github.com/user-attachments/assets/b7483bbb-e85b-4a51-b752-c33884ebe69d)
 
